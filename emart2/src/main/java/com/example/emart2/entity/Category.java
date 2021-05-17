@@ -23,10 +23,12 @@ public class Category extends BaseEntity {
   private String description;
 
   @Column(nullable = false)
-  private final boolean isActive;
+  @Setter
+  private boolean isActive;
 
   @Column(length=50, nullable = false)
-  private final int order;
+  @Setter
+  private int order;
 
   @Builder
   public Category(String name, String description){

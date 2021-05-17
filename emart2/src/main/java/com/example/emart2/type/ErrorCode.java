@@ -1,6 +1,7 @@
 package com.example.emart2.type;
 
 public enum ErrorCode {
+  NOT_FOUND(1000, "NOT FOUND"),
   ACCESS_DENIED(1004, "ACCESS_DENIED"),
   ;
   private final String message;
