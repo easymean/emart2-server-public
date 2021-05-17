@@ -4,30 +4,28 @@ import lombok.Getter;
 
 @Getter
 public class CommonResponse<T> {
-  private final String errorCode;
   private final String message;
   private final T data;
 
-  public CommonResponse(String code, String message, T data){
-    this.errorCode = code;
+  public CommonResponse(String message, T data){
     this.message = message;
     this.data = data;
   }
 
   public static <T> CommonResponse<T> ok(String message, T data){
-    return new CommonResponse<>(null, message, data);
+    return new CommonResponse<>(message, data);
   }
 
   public static <T> CommonResponse<T> ok(T data){
-    return new CommonResponse<>(null, "", data);
+    return new CommonResponse<>("", data);
   }
 
-  public static <T> CommonResponse<T> fail(String errorCode, String message){
-    return new CommonResponse<>(errorCode, message, null);
+  public static <T> CommonResponse<T> fail(String message){
+    return new CommonResponse<>(message, null);
   }
 
   public static CommonResponse<Void> ok(){
-    return new CommonResponse<>(null, null, null);
+    return new CommonResponse<>(null, null);
   }
 
 
