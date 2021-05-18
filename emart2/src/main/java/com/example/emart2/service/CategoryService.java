@@ -1,6 +1,8 @@
 package com.example.emart2.service;
 
-import com.example.emart2.dto.CategoryDto;
+import com.example.emart2.dto.CategoryRequest;
+import com.example.emart2.dto.CategoryResponse;
+import com.example.emart2.dto.CategoryResponseList;
 import com.example.emart2.entity.Category;
 import com.example.emart2.exception.NotFoundException;
 import com.example.emart2.repository.CategoryRepository;
@@ -8,7 +10,6 @@ import com.example.emart2.type.ErrorCode;
 import com.example.emart2.type.mapper.CategoryMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class CategoryService {
     this.categoryRepository = categoryRepository;
   }
 
-  public CategoryDto.Response findById(Long id){
+  public CategoryResponse findById(Long id){
     return categoryRepository.findById(id)
         .map(CategoryMapper.INSTANCE::toDto)
         .orElseGet(() -> {
@@ -28,24 +29,23 @@ public class CategoryService {
         });
   }
 
-  public CategoryDto.Responses getList(){
-    List<CategoryDto.Response> categoryList = new ArrayList<>();
+  public CategoryResponseList getList(){
     List<Category> categories = categoryRepository.findAll();
 
-        categories = categoryRepository.findAll().stream().map(CategoryMapper.INSTANCE::toDto);
-
-    return CategoryDto.Responses.builder()
-        .categoryList(categories).build());
+    List<CategoryResponse> responses = CategoryMapper.INSTANCE.toDto(categories);
+    CategoryResponseList categoryResponseList = new CategoryResponseList();
+    categoryResponseList.setCategoryList(responses);
+    return categoryResponseList;
   }
 
-  public CategoryDto.Response createCategory(CategoryDto.Request req){
+  public CategoryResponse createCategory(CategoryRequest req){
     Category category = CategoryMapper.INSTANCE.toEntity(req);
     Category newCategory = categoryRepository.save(category);
 
     return CategoryMapper.INSTANCE.toDto(newCategory);
   }
 
-  public CategoryDto.Response updateCategory(Long id, CategoryDto.Request req){
+  public CategoryResponse updateCategory(Long id, CategoryRequest req){
     Optional<Category> optional = categoryRepository.findById(id);
     return optional
         .map(category -> {
