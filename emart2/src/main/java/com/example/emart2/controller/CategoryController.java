@@ -1,7 +1,9 @@
 package com.example.emart2.controller;
 
 import com.example.emart2.common.CommonResponse;
-import com.example.emart2.dto.CategoryDto;
+import com.example.emart2.dto.CategoryRequest;
+import com.example.emart2.dto.CategoryResponse;
+import com.example.emart2.dto.CategoryResponseList;
 import com.example.emart2.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,27 +17,27 @@ public class CategoryController {
 
 
   @GetMapping("/{id}")
-  public CommonResponse<CategoryDto.Response> getCategoryById(@PathVariable("id") Long id){
+  public CommonResponse<CategoryResponse> getCategoryById(@PathVariable("id") Long id){
     return CommonResponse.ok("success", categoryService.findById(id));
   }
 
   @GetMapping("/")
-  public CommonResponse<CategoryDto.Response> getCategoryList(){
+  public CommonResponse<CategoryResponseList> getCategoryList(){
     return CommonResponse.ok("success", categoryService.getList());
   }
 
   @PostMapping("/")
-  public CommonResponse<CategoryDto.Response> createCategory(@RequestBody CategoryDto.Request request){
+  public CommonResponse<CategoryResponse> createCategory(@RequestBody CategoryRequest request){
     return CommonResponse.ok("success", categoryService.createCategory(request));
   }
 
   @PutMapping("/{id}")
-  public CommonResponse<CategoryDto.Response> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryDto.Request request){
+  public CommonResponse<CategoryResponse> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryRequest request){
     return CommonResponse.ok("success", categoryService.updateCategory(id, request));
   }
 
   @DeleteMapping("/{id}")
-  public CommonResponse<CategoryDto.Response> deleteCategory(@PathVariable("id") Long id){
+  public CommonResponse<Void> deleteCategory(@PathVariable("id") Long id){
     categoryService.deleteCategory(id);
     return CommonResponse.ok(null,null );
   }
