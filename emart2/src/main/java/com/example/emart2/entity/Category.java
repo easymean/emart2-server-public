@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter
-@Entity @Table(name = "Category")
+@Entity @Table(name = "category")
 public class Category extends BaseEntity {
 
   @Id
@@ -22,25 +22,22 @@ public class Category extends BaseEntity {
   @Setter
   private String description;
 
-  @Column(nullable = false)
-  @Setter
-  private boolean isActive;
 
-  @Column(length=50, nullable = false)
   @Setter
-  private int order;
+  @Column(nullable = false)
+  private int colOrder;
 
   @Builder
   public Category(String name, String description){
     this.name = name;
     this.description = description;
-    this.order = 0;
+    this.colOrder = 0;
     this.isActive = true;
   }
 
   public Category(){
     this.isActive = true;
-    this.order = 0;
+    this.colOrder = 0;
   }
 
 }
