@@ -16,7 +16,7 @@ public class CategoryController {
   }
 
 
-  @GetMapping("/{id}")
+  @GetMapping("{id}")
   public CommonResponse<CategoryResponse> getCategoryById(@PathVariable("id") Long id){
     return CommonResponse.ok("success", categoryService.findById(id));
   }
@@ -31,12 +31,12 @@ public class CategoryController {
     return CommonResponse.ok("success", categoryService.createCategory(request));
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("{id}")
   public CommonResponse<CategoryResponse> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryRequest request){
     return CommonResponse.ok("success", categoryService.updateCategory(id, request));
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("{id}")
   public CommonResponse<Void> deleteCategory(@PathVariable("id") Long id){
     categoryService.deleteCategory(id);
     return CommonResponse.ok(null,null );
