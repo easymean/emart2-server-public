@@ -12,6 +12,15 @@ repositories {
 	mavenCentral()
 }
 
+
+def	querydslVersion = '4.3.1'
+def	junitVersion = '5.1.0'
+def	lombokVersion = '1.18.18'
+def	mapstructVersion = '1.4.2.Final'
+def	lombokMapstructBindVersion = '0.2.0'
+
+
+
 dependencies {
 	implementation 'org.mapstruct:mapstruct:1.3.1.Final'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.1'
@@ -21,14 +30,26 @@ dependencies {
 	implementation 'org.projectlombok:lombok'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
-	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.1.0'
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testRuntimeOnly "org.junit.vintage:junit-vintage-engine:${junitVersion}"
 	testCompileOnly 'junit:junit:4.12'
 
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
+	implementation "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindVersion}"
+	implementation "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	implementation "com.querydsl:querydsl-core:${querydslVersion}"
+	implementation "com.querydsl:querydsl-jpa:${querydslVersion}"
+	annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
+	annotationProcessor "javax.annotation:javax.annotation-api:1.3.2"
+	annotationProcessor "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final"
 }
 
 test {
