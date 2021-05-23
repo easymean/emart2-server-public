@@ -27,4 +27,8 @@ public abstract class BaseEntity {
   @Setter
   protected boolean isActive;
 
+  BaseEntity(){
+    this.isActive = true;
+  }
+
 }
