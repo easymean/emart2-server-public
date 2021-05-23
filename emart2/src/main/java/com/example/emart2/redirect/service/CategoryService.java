@@ -1,11 +1,11 @@
-package com.example.emart2.service;
+package com.example.emart2.redirect.service;
 
-import com.example.emart2.dto.CategoryRequest;
-import com.example.emart2.dto.CategoryResponse;
-import com.example.emart2.dto.CategoryResponseList;
-import com.example.emart2.entity.Category;
+import com.example.emart2.redirect.dto.CategoryRequest;
+import com.example.emart2.redirect.dto.CategoryResponse;
+import com.example.emart2.redirect.dto.CategoryResponseList;
+import com.example.emart2.redirect.entity.Category;
+import com.example.emart2.redirect.repository.CategoryRepository;
 import com.example.emart2.exception.NotFoundException;
-import com.example.emart2.repository.CategoryRepository;
 import com.example.emart2.type.ErrorCode;
 import com.example.emart2.type.mapper.CategoryMapper;
 import org.springframework.stereotype.Service;

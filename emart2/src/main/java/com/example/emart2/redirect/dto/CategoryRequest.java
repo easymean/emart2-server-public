@@ -1,4 +1,4 @@
-package com.example.emart2.dto;
+package com.example.emart2.redirect.dto;
 
 
 import lombok.Getter;

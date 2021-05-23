@@ -101,8 +101,9 @@ public class WebsiteService {
   }
 
   public WebsiteResponseList getTopByFreq(){
-    List<Website> websites;
-    return new WebsiteResponseList(websiteMapper.toDto(websites));
+//    List<Website> websites;
+//    return new WebsiteResponseList(websiteMapper.toDto(websites));
+    return null;
   }
 
   public void increaseFreqById(Long id){

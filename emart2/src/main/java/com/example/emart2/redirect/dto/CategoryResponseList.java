@@ -1,5 +1,6 @@
-package com.example.emart2.dto;
+package com.example.emart2.redirect.dto;
 
+import com.example.emart2.redirect.dto.CategoryResponse;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,10 +1,10 @@
-package com.example.emart2.controller;
+package com.example.emart2.redirect.controller;
 
 import com.example.emart2.common.CommonResponse;
-import com.example.emart2.dto.CategoryRequest;
-import com.example.emart2.dto.CategoryResponse;
-import com.example.emart2.dto.CategoryResponseList;
-import com.example.emart2.service.CategoryService;
+import com.example.emart2.redirect.dto.CategoryRequest;
+import com.example.emart2.redirect.dto.CategoryResponse;
+import com.example.emart2.redirect.dto.CategoryResponseList;
+import com.example.emart2.redirect.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("/category")

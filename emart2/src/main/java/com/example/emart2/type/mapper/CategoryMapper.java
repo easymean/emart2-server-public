@@ -1,11 +1,10 @@
 package com.example.emart2.type.mapper;
 
-import com.example.emart2.dto.CategoryRequest;
-import com.example.emart2.dto.CategoryResponse;
-import com.example.emart2.entity.Category;
+import com.example.emart2.redirect.dto.CategoryRequest;
+import com.example.emart2.redirect.dto.CategoryResponse;
+import com.example.emart2.redirect.entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.emart2.config;
 
-import com.example.emart2.entity.BaseEntity;
+import com.example.emart2.redirect.entity.BaseEntity;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Service;
 
