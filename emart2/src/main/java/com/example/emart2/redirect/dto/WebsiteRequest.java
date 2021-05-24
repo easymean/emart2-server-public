@@ -13,17 +13,17 @@ public class WebsiteRequest {
   private final String url;
   private final StageType stage;
   private final Long categoryId;
-  private final boolean isDev;
+  private final boolean dev;
 
 
   @Builder
-  public WebsiteRequest(String name, String description, String url, StageType stage, Long categoryId, boolean isDev) {
+  public WebsiteRequest(String name, String description, String url, StageType stage, Long categoryId, boolean dev) {
     this.name = name;
     this.description = description;
     this.url = url;
     this.stage = stage;
     this.categoryId = categoryId;
-    this.isDev = isDev;
+    this.dev = dev;
   }
 
 

@@ -27,7 +27,7 @@ public class Website extends BaseEntity {
   @Column(columnDefinition = "TEXT")
   @Setter
   private String url;
-  
+
   @Column
   private int frequency;
 
@@ -38,7 +38,7 @@ public class Website extends BaseEntity {
 
   @Column
   @Setter
-  private boolean isDev;
+  private boolean dev;
 
   @Setter
   @ManyToOne
@@ -46,14 +46,14 @@ public class Website extends BaseEntity {
 
 
   @Builder
-  public Website(String name, String description, String url, StageType stage, boolean isDev) {
+  public Website(String name, String description, String url, StageType stage, boolean dev) {
     super();
     this.name = name;
     this.description = description;
     this.url = url;
     this.frequency = 0;
     this.stage = stage;
-    this.isDev = isDev;
+    this.dev = dev;
   }
 
   public Website() {
