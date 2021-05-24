@@ -16,36 +16,38 @@ import java.util.Optional;
 @Service
 public class CategoryService {
   CategoryRepository categoryRepository;
+  CategoryMapper categoryMapper;
 
-  public CategoryService(CategoryRepository categoryRepository){
+  public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
     this.categoryRepository = categoryRepository;
+    this.categoryMapper = categoryMapper;
   }
 
-  public CategoryResponse findById(Long id){
+  public CategoryResponse findById(Long id) {
     return categoryRepository.findById(id)
-        .map(CategoryMapper.INSTANCE::toDto)
+        .map(categoryMapper::toDto)
         .orElseGet(() -> {
           throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
         });
   }
 
-  public CategoryResponseList getList(){
+  public CategoryResponseList getList() {
     List<Category> categories = categoryRepository.findAll();
 
-    List<CategoryResponse> responses = CategoryMapper.INSTANCE.toDto(categories);
+    List<CategoryResponse> responses = categoryMapper.toDto(categories);
     CategoryResponseList categoryResponseList = new CategoryResponseList();
     categoryResponseList.setCategoryList(responses);
     return categoryResponseList;
   }
 
-  public CategoryResponse createCategory(CategoryRequest req){
-    Category category = CategoryMapper.INSTANCE.toEntity(req);
+  public CategoryResponse createCategory(CategoryRequest req) {
+    Category category = categoryMapper.toEntity(req);
     Category newCategory = categoryRepository.save(category);
 
-    return CategoryMapper.INSTANCE.toDto(newCategory);
+    return categoryMapper.toDto(newCategory);
   }
 
-  public CategoryResponse updateCategory(Long id, CategoryRequest req){
+  public CategoryResponse updateCategory(Long id, CategoryRequest req) {
     Optional<Category> optional = categoryRepository.findById(id);
     return optional
         .map(category -> {
@@ -54,13 +56,13 @@ public class CategoryService {
           return category;
         })
         .map(categoryRepository::save)
-        .map(CategoryMapper.INSTANCE::toDto)
+        .map(categoryMapper::toDto)
         .orElseGet(() -> {
           throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
         });
   }
 
-  public void deleteCategory(Long id){
+  public void deleteCategory(Long id) {
     Optional<Category> optional = categoryRepository.findById(id);
     optional
         .map(category -> {
@@ -72,7 +74,6 @@ public class CategoryService {
           throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
         });
   }
-
 
 
 }
