@@ -20,14 +20,14 @@ public class WebsiteService {
   WebsiteMapper websiteMapper;
   CategoryRepository categoryRepository;
 
-  public WebsiteService(WebsiteRepository websiteRepository, WebsiteMapper websiteMapper, CategoryRepository categoryRepository){
+  public WebsiteService(WebsiteRepository websiteRepository, WebsiteMapper websiteMapper, CategoryRepository categoryRepository) {
     this.websiteRepository = websiteRepository;
     this.websiteMapper = websiteMapper;
     this.categoryRepository = categoryRepository;
   }
 
   // id가 null이면 illegalargumentexception
-  public WebsiteResponse findById(Long id){
+  public WebsiteResponse findById(Long id) {
     return websiteRepository.findByIdAndIsActiveIsTrue(id)
         .map(websiteMapper::toDto)
         .orElseGet(() -> {
@@ -35,16 +35,16 @@ public class WebsiteService {
         });
   }
 
-  public WebsiteResponseList findByCategory(Long categoryId){
+  public WebsiteResponseList findByCategory(Long categoryId) {
     Category category = categoryRepository.findByIdAndIsActiveIsTrue(categoryId)
-        .orElseGet(()-> {
+        .orElseGet(() -> {
           throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
         });
     List<Website> websites = new ArrayList<>(category.getWebsites());
     return new WebsiteResponseList(websiteMapper.toDto(websites));
   }
 
-  public WebsiteResponseList getList(){
+  public WebsiteResponseList getList() {
     List<Website> categories = websiteRepository.findAllByIsActiveIsTrue();
 
     List<WebsiteResponse> responses = websiteMapper.toDto(categories);
@@ -53,17 +53,17 @@ public class WebsiteService {
     return websiteResponseList;
   }
 
-  public WebsiteResponse createWebsite(WebsiteRequest req){
+  public WebsiteResponse createWebsite(WebsiteRequest req) {
     Website website = websiteMapper.toEntity(req);
     Long categoryId = req.getCategoryId();
 
     categoryRepository.findByIdAndIsActiveIsTrue(categoryId)
-        .map(category-> {
+        .map(category -> {
           category.addWebsite(website);
           return category;
         })
         .map(categoryRepository::save)
-        .orElseGet(()-> {
+        .orElseGet(() -> {
           throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
         });
 
@@ -72,7 +72,7 @@ public class WebsiteService {
     return websiteMapper.toDto(newCategory);
   }
 
-  public WebsiteResponse updateWebsite(Long id, WebsiteRequest req){
+  public WebsiteResponse updateWebsite(Long id, WebsiteRequest req) {
     Optional<Website> optional = websiteRepository.findByIdAndIsActiveIsTrue(id);
     return optional
         .map(website -> {
@@ -87,7 +87,7 @@ public class WebsiteService {
         });
   }
 
-  public void deleteWebsite(Long id){
+  public void deleteWebsite(Long id) {
     Optional<Website> optional = websiteRepository.findByIdAndIsActiveIsTrue(id);
     optional
         .map(category -> {
@@ -107,7 +107,6 @@ public class WebsiteService {
   public void increaseFreqById(Long id) {
     websiteRepository.increaseFreq(id);
   }
-
 
 
 }
