@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface WebsiteCustomRepository {
   List<Website> findTop3ByFreq();
+
+  void increaseFreq(Long id);
 }

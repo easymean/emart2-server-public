@@ -100,14 +100,12 @@ public class WebsiteService {
         });
   }
 
-  public WebsiteResponseList getTopByFreq(){
-//    List<Website> websites;
-//    return new WebsiteResponseList(websiteMapper.toDto(websites));
-    return null;
+  public WebsiteResponseList getTopByFreq() {
+    return new WebsiteResponseList(websiteMapper.toDto(websiteRepository.findTop3ByFreq()));
   }
 
-  public void increaseFreqById(Long id){
-
+  public void increaseFreqById(Long id) {
+    websiteRepository.increaseFreq(id);
   }
 
 

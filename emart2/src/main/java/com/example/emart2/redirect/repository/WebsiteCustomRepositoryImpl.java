@@ -21,10 +21,17 @@ public class WebsiteCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
   @Override
   public List<Website> findTop3ByFreq() {
-    final QWebsite qWebsite = QWebsite.website;
     return from(qWebsite)
         .limit(3)
         .orderBy(qWebsite.frequency.desc())
         .fetch();
+  }
+
+  @Override
+  public void increaseFreq(Long id) {
+    update(qWebsite)
+        .where(qWebsite.id.eq(id))
+        .set(qWebsite.frequency, qWebsite.frequency.add(1))
+        .execute();
   }
 }
