@@ -1,6 +1,6 @@
 package com.example.emart2.redirect.entity;
 
-import com.example.emart2.type.StageCode;
+import com.example.emart2.type.StageType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,14 +8,15 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter
-@Entity @Table(name = "website")
+@Entity
+@Table(name = "website")
 public class Website extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(length=50, nullable = false)
+  @Column(length = 50, nullable = false)
   @Setter
   private String name;
 
@@ -26,15 +27,18 @@ public class Website extends BaseEntity {
   @Column(columnDefinition = "TEXT")
   @Setter
   private String url;
-
-
-  @Setter
+  
   @Column
   private int frequency;
 
   @Column
+  @Setter
   @Enumerated(EnumType.STRING)
-  private StageCode stage;
+  private StageType stage;
+
+  @Column
+  @Setter
+  private boolean isDev;
 
   @Setter
   @ManyToOne
@@ -42,16 +46,17 @@ public class Website extends BaseEntity {
 
 
   @Builder
-  public Website(String name, String description, String url, StageCode stage){
+  public Website(String name, String description, String url, StageType stage, boolean isDev) {
     super();
     this.name = name;
     this.description = description;
     this.url = url;
     this.frequency = 0;
     this.stage = stage;
+    this.isDev = isDev;
   }
 
-  public Website(){
+  public Website() {
     super();
   }
 

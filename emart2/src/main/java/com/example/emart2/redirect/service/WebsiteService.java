@@ -78,6 +78,9 @@ public class WebsiteService {
         .map(website -> {
           website.setName(req.getName());
           website.setDescription(req.getDescription());
+          website.setUrl(req.getUrl());
+          website.setStage(req.getStage());
+          website.setDev(req.isDev());
           return website;
         })
         .map(websiteRepository::save)
