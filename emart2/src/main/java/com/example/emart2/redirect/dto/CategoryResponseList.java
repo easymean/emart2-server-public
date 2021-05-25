@@ -1,6 +1,5 @@
 package com.example.emart2.redirect.dto;
 
-import com.example.emart2.redirect.dto.CategoryResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +14,14 @@ public class CategoryResponseList {
   public CategoryResponseList(){
     categoryList = new ArrayList<>();
   }
+  public CategoryResponseList(List<CategoryResponse> categoryList){
+    this.categoryList = categoryList;
+  }
 
   public void addCategory(CategoryResponse dto){
+    if(this.categoryList == null){
+      this.categoryList = new ArrayList<>();
+    }
     this.categoryList.add(dto);
   }
 }

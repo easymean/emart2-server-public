@@ -60,4 +60,12 @@ public class Website extends BaseEntity {
     super();
   }
 
+  @Override
+  public String toString(){
+    return "{" +
+        "name: " + name +
+        "description: " + description +
+        "}";
+  }
+
 }

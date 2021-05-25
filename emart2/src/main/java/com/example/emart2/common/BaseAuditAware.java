@@ -1,4 +1,4 @@
-package com.example.emart2.config;
+package com.example.emart2.common;
 
 import com.example.emart2.redirect.entity.BaseEntity;
 import org.springframework.data.domain.AuditorAware;
