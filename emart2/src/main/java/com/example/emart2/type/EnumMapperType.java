@@ -1,4 +1,4 @@
-package com.example.emart2.type.mapper;
+package com.example.emart2.type;
 
 public interface EnumMapperType {
   String getCode();
