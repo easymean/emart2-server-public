@@ -4,7 +4,9 @@ import com.example.emart2.common.CommonResponse;
 import com.example.emart2.redirect.dto.CategoryRequest;
 import com.example.emart2.redirect.dto.CategoryResponse;
 import com.example.emart2.redirect.dto.CategoryResponseList;
+import com.example.emart2.redirect.dto.EnumResponseList;
 import com.example.emart2.redirect.service.CategoryService;
+import com.example.emart2.type.mapper.EnumMapper;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,9 +14,16 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
   CategoryService categoryService;
+  EnumMapper enumMapper;
 
-  public CategoryController(CategoryService categoryService) {
+  public CategoryController(CategoryService categoryService, EnumMapper enumMapper) {
     this.categoryService = categoryService;
+    this.enumMapper = enumMapper;
+  }
+
+  @GetMapping("stage")
+  public CommonResponse<EnumResponseList> getAllStage() {
+    return CommonResponse.ok("success", new EnumResponseList(enumMapper.get("StageType")));
   }
 
   @GetMapping("{id}")
