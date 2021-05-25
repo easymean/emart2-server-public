@@ -11,4 +11,5 @@ public interface WebsiteRepository extends JpaRepository<Website, Long>, Website
   Optional<Website> findByIdAndIsActiveIsTrue(Long id);
 
   List<Website> findAllByIsActiveIsTrue();
+  List<Website> findAllByNameContains(String keyword);
 }

@@ -21,9 +21,9 @@ public class WebsiteCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
   @Override
   public List<Website> findTop3ByFreq() {
-    return from(qWebsite)
-        .limit(3)
+    return queryFactory.selectFrom(qWebsite)
         .orderBy(qWebsite.frequency.desc())
+        .limit(3)
         .fetch();
   }
 

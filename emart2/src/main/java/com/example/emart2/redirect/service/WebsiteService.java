@@ -6,7 +6,7 @@ import com.example.emart2.redirect.entity.Category;
 import com.example.emart2.redirect.entity.Website;
 import com.example.emart2.redirect.repository.CategoryRepository;
 import com.example.emart2.redirect.repository.WebsiteRepository;
-import com.example.emart2.type.ErrorCode;
+import com.example.emart2.type.ErrorType;
 import com.example.emart2.type.mapper.WebsiteMapper;
 import org.springframework.stereotype.Service;
 
@@ -31,14 +31,14 @@ public class WebsiteService {
     return websiteRepository.findByIdAndIsActiveIsTrue(id)
         .map(websiteMapper::toDto)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 
   public WebsiteResponseList findByCategory(Long categoryId) {
     Category category = categoryRepository.findByIdAndIsActiveIsTrue(categoryId)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
     List<Website> websites = new ArrayList<>(category.getWebsites());
     return new WebsiteResponseList(websiteMapper.toDto(websites));
@@ -64,7 +64,7 @@ public class WebsiteService {
         })
         .map(categoryRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
 
     Website newCategory = websiteRepository.save(website);
@@ -86,7 +86,7 @@ public class WebsiteService {
         .map(websiteRepository::save)
         .map(websiteMapper::toDto)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 
@@ -99,7 +99,7 @@ public class WebsiteService {
         })
         .map(websiteRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 
@@ -109,6 +109,10 @@ public class WebsiteService {
 
   public void increaseFreqById(Long id) {
     websiteRepository.increaseFreq(id);
+  }
+
+  public WebsiteResponseList findWebsiteByKeyword(String keyword){
+    return new WebsiteResponseList(websiteMapper.toDto(websiteRepository.findAllByNameContains(keyword)));
   }
 
 
