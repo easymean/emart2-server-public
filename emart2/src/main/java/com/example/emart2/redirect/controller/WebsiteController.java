@@ -26,6 +26,11 @@ public class WebsiteController {
   public CommonResponse<WebsiteResponseList> getWebsiteByFreq() {
     return CommonResponse.ok("success", websiteService.getTopByFreq());
   }
+
+  @GetMapping("search")
+  public CommonResponse<WebsiteResponseList> findWebsiteByKeyword(@RequestParam("keyword") String keyword) {
+    return CommonResponse.ok("success", websiteService.findWebsiteByKeyword(keyword));
+  }
   
   @GetMapping("{id}")
   public CommonResponse<WebsiteResponse> getWebsiteById(@PathVariable("id") Long id) {
