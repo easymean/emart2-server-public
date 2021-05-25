@@ -6,7 +6,7 @@ import com.example.emart2.redirect.dto.CategoryResponseList;
 import com.example.emart2.redirect.entity.Category;
 import com.example.emart2.redirect.repository.CategoryRepository;
 import com.example.emart2.exception.NotFoundException;
-import com.example.emart2.type.ErrorCode;
+import com.example.emart2.type.ErrorType;
 import com.example.emart2.type.mapper.CategoryMapper;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class CategoryService {
     return categoryRepository.findById(id)
         .map(categoryMapper::toDto)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 
@@ -58,7 +58,7 @@ public class CategoryService {
         .map(categoryRepository::save)
         .map(categoryMapper::toDto)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 
@@ -71,7 +71,7 @@ public class CategoryService {
         })
         .map(categoryRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorCode.NOT_FOUND);
+          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
 

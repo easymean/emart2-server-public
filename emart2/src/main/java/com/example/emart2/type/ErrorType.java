@@ -1,6 +1,6 @@
 package com.example.emart2.type;
 
-public enum ErrorCode {
+public enum ErrorType {
   NOT_FOUND(1000, "NOT FOUND"),
   ACCESS_DENIED(1004, "ACCESS_DENIED"),
   INVALID_PARAM(1005, "INVALID_PARAM")
@@ -8,7 +8,7 @@ public enum ErrorCode {
   private final String message;
   private final int code;
 
-  ErrorCode(int code, String message){
+  ErrorType(int code, String message){
     this.code = code;
     this.message = message;
   }
