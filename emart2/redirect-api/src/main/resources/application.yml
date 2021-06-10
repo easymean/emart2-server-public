@@ -1,0 +1,4 @@
+server.servlet.context-path: "/api"
+spring.mvc.hiddenmethod.filter.enabled: true
+logging.level.org.hibernate.SQL: debug
+logging.level.org.hibernate.type.descriptor.sql: trace
