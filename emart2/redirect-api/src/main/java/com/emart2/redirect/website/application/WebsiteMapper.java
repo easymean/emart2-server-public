@@ -14,10 +14,8 @@ import java.util.List;
 public interface WebsiteMapper {
   WebsiteMapper INSTANCE = Mappers.getMapper(WebsiteMapper.class);
 
-  @Mapping(target = "categoryId", ignore = true)
   WebsiteEntity toEntity(CreateWebsiteRequest dto);
 
-  @Mapping(target = "categoryId", ignore = true)
   WebsiteEntity toEntity(UpdateWebsiteRequest dto);
 
   WebsiteResponse toDto(WebsiteEntity category);

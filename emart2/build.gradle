@@ -1,7 +1,8 @@
 buildscript {
+
     ext {
         springBootVersion = '2.4.5'
-        querydslVersion = '1.0.10'
+        querydslPluginVersion = '1.0.10'
     }
 
     repositories {
@@ -11,61 +12,51 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:$querydslVersion")
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:$querydslPluginVersion")
     }
 }
 
 def api = project(":redirect-api")
 def core = project(":redirect-core")
-def multiModules = [core, api]
+def multiModules = [api, core]
 
 configure(multiModules) {
+
+    apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'java'
-    apply plugin: 'com.ewerk.gradle.plugins.querydsl'
 
     group = 'com.emart'
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '11'
-    compileJava.options.encoding = "UTF-8"
+    compileJava.options.encoding = 'UTF-8'
 
-    def querydslDir = "$buildDir/generated/querydsl"
-    querydsl {
-        library = "com.querydsl:querydsl-apt:4.2.2"
-        jpa = true
-        querydslSourcesDir = querydslDir
-    }
-
-    sourceSets {
-        main.java.srcDir querydslDir
-    }
-
-    configurations {
-        querydsl.extendsFrom compileClassPath
-    }
-
-    compileQuerydsl {
-        options.annotationProcessorPath = configurations.querydsl
-    }
 
     repositories {
         mavenCentral()
     }
 
+    ext {
+        querydslVersion = '4.3.1'
+        lombokVersion = '1.18.12'
+    }
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly "org.projectlombok:lombok:$lombokVersion"
+        annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
 
-        compile 'com.querydsl:querydsl-jpa'
-        compile 'com.querydsl:querydsl-apt'
+        implementation "com.querydsl:querydsl-core:$querydslVersion"
+        implementation "com.querydsl:querydsl-jpa:$querydslVersion"
+        annotationProcessor "com.querydsl:querydsl-apt:$querydslVersion:jpa"
+        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-        testCompileOnly 'org.projectlombok:lombok'
+        testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
         implementation 'org.springframework.boot:spring-boot-starter-security'
         implementation 'org.springframework.security:spring-security-test'
@@ -74,14 +65,13 @@ configure(multiModules) {
     test {
         useJUnitPlatform()
     }
+
     clean {
-        delete file('src/main/generated')
+        delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성위치
     }
 }
 
 
-
-
-
-
-
+task cleanGeneratedDir(type: Delete) {
+    delete file('src/main/generated')
+}

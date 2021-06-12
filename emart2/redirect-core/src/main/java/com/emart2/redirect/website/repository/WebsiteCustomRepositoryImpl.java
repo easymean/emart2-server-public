@@ -1,5 +1,6 @@
 package com.emart2.redirect.website.repository;
 
+import com.emart2.redirect.website.entity.QWebsiteEntity;
 import com.emart2.redirect.website.entity.WebsiteEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -11,7 +12,7 @@ import java.util.List;
 public class WebsiteCustomRepositoryImpl extends QuerydslRepositorySupport implements WebsiteCustomRepository {
 
   private final JPAQueryFactory queryFactory;
-  private final QWebsite qWebsite = QWebsite.website;
+  private final QWebsiteEntity qWebsite = QWebsiteEntity.websiteEntity;
 
   public WebsiteCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
     super(WebsiteEntity.class);
