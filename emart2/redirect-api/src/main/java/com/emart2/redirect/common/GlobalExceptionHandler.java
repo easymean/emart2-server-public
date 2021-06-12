@@ -12,14 +12,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(NotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public CommonResponse<Object> handleNotFoundException(CommonException ex) {
+  public CommonResponse<Object> handleException(NotFoundException ex) {
     logger.error(ex.getMessage());
     return CommonResponse.fail(ex.getMessage());
   }
 
   @ExceptionHandler(IllegalArgumentException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public CommonResponse<Object> handleIllegalArgumentException(CommonException ex) {
+  public CommonResponse<Object> handleException(IllegalArgumentException ex) {
     logger.error(ex.getMessage());
     return CommonResponse.fail(ex.getMessage());
   }

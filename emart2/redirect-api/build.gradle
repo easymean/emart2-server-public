@@ -11,7 +11,7 @@ dependencies {
     implementation "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
 
-    //testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
