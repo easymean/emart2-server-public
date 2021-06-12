@@ -1,5 +1,13 @@
-def mapstructVersion = '1.4.2.Final'
-def lombokMapstructBindVersion = '0.2.0'
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.9.2'
+}
+
+ext {
+    mapstructVersion = '1.4.2.Final'
+    lombokMapstructBindVersion = '0.2.0'
+    restdocsVersion = '2.0.4.RELEASE'
+    snippetsDir = file('build/generated-snippets')
+}
 
 
 dependencies {
@@ -12,8 +20,25 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:$restdocsVersion"
 }
 
 test {
     useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5") //gradle 빌드시 ./build/asciidoc/html5/에 html파일 생성
+            {
+                into 'static/docs' // html파일이 jar안에 /static/docs/폴더에 복사
+            }
 }
