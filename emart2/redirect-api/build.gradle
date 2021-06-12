@@ -19,9 +19,9 @@ dependencies {
     implementation "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:$restdocsVersion"
 }
 
@@ -37,8 +37,7 @@ asciidoctor {
 
 bootJar {
     dependsOn asciidoctor
-    from("${asciidoctor.outputDir}/html5") //gradle 빌드시 ./build/asciidoc/html5/에 html파일 생성
-            {
-                into 'static/docs' // html파일이 jar안에 /static/docs/폴더에 복사
-            }
+    from("${asciidoctor.outputDir}/html5") { //gradle 빌드시 ./build/asciidoc/html5/에 html파일 생성
+        into 'static/docs' // html파일이 jar안에 /static/docs/폴더에 복사
+    }
 }
