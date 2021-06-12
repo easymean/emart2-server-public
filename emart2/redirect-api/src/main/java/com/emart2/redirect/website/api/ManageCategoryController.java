@@ -8,7 +8,7 @@ import com.emart2.redirect.website.dto.CategoryResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/admin/category")
+@RequestMapping("v1/admin/category")
 public class ManageCategoryController {
 
   private final CategoryManager categoryManager;
@@ -35,6 +35,6 @@ public class ManageCategoryController {
   @DeleteMapping("{id}")
   public CommonResponse<Void> deleteCategory(@PathVariable("id") Long id) {
     categoryManager.deleteCategory(id);
-    return CommonResponse.ok(null, null);
+    return CommonResponse.ok();
   }
 }

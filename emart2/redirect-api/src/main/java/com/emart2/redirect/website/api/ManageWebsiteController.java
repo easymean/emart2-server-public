@@ -8,7 +8,7 @@ import com.emart2.redirect.website.dto.WebsiteResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/admin/website")
+@RequestMapping("v1/admin/website")
 public class ManageWebsiteController {
 
   private final WebsiteManager websiteManager;
@@ -30,6 +30,6 @@ public class ManageWebsiteController {
   @DeleteMapping("{id}")
   public CommonResponse<Void> deleteWebsite(@PathVariable("id") Long id) {
     websiteManager.deleteWebsite(id);
-    return CommonResponse.ok("정상적으로 삭제되었습니다.", null);
+    return CommonResponse.ok();
   }
 }

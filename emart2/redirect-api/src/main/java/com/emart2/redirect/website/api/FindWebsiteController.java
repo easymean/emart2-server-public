@@ -7,7 +7,7 @@ import com.emart2.redirect.website.dto.WebsiteResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/website")
+@RequestMapping("v1/website")
 public class FindWebsiteController {
 
   private final WebsiteFinder websiteFinder;

@@ -12,10 +12,10 @@ public class VisitWebsiteController {
     this.websiteFinder = websiteFinder;
   }
 
-  @PutMapping("/v1/website/visit/{id}")
+  @PutMapping("v1/website/visit/{id}")
   public CommonResponse<Void> visitWebsite(@PathVariable("id") Long id) {
     websiteFinder.visitWebsite(id);
-    return CommonResponse.ok("success", null);
+    return CommonResponse.ok();
   }
 
 }

@@ -6,7 +6,7 @@ import com.emart2.redirect.website.dto.CategoryListResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/category")
+@RequestMapping("v1/category")
 public class FindCategoryListController {
 
   private final CategoryFinder categoryFinder;
