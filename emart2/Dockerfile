@@ -5,7 +5,8 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 RUN chmod +x gradlew
-RUN ./gradlew bootJar
+RUN ./gradlew clean build
+RUN ./gradlew :redirect-api:bootRun
 
 FROM openjdk:11-jdk
 ARG JAR_FILE=build/libs/*.jar
