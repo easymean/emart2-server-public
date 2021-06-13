@@ -7,7 +7,7 @@ import com.emart2.redirect.website.dto.WebsiteResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("v1/website")
+@RequestMapping("/v1/websites")
 public class FindWebsiteController {
 
   private final WebsiteFinder websiteFinder;
@@ -16,17 +16,17 @@ public class FindWebsiteController {
     this.websiteFinder = websiteFinder;
   }
 
-  @GetMapping("visit")
+  @GetMapping("/visit")
   public CommonResponse<WebsiteListResponse> findFrequentlyVisitedWebsites() {
     return CommonResponse.ok("success", websiteFinder.findFrequentlyVisitedWebsites());
   }
 
-  @GetMapping("search")
+  @GetMapping("/search")
   public CommonResponse<WebsiteListResponse> searchWebsiteByKeyword(@RequestParam("keyword") String keyword) {
     return CommonResponse.ok("success", websiteFinder.searchWebsiteByKeyword(keyword));
   }
 
-  @GetMapping("{id}")
+  @GetMapping("/{id}")
   public CommonResponse<WebsiteResponse> findWebsite(@PathVariable("id") Long id) {
     return CommonResponse.ok("success", websiteFinder.findWebsite(id));
   }

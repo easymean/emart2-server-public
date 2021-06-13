@@ -14,7 +14,7 @@ public class FindStageListController {
     this.enumMapper = enumMapper;
   }
 
-  @GetMapping("v1/stage/")
+  @GetMapping("/v1/stages")
   public CommonResponse<EnumResponseList> getAllStage() {
     return CommonResponse.ok("success", new EnumResponseList(enumMapper.get("StageType")));
   }
