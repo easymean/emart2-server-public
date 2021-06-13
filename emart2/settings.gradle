@@ -1,1 +1,4 @@
 rootProject.name = 'emart2'
+include 'redirect-api'
+include 'redirect-core'
+

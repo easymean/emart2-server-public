@@ -1,0 +1,13 @@
+spring.datasource:
+  driver-class-name: org.mariadb.jdbc.Driver
+  url: "jdbc:mariadb://3.35.22.94:3306/emart2_redirect_db?characterEncoding=UTF-8&serverTimezone=KST"
+  username: "emart"
+  password: "123"
+
+spring.jpa:
+  database: mysql
+  database-platform: org.hibernate.dialect.MariaDB10Dialect
+  show-sql: true
+  hibernate.ddl-auto: update
+
+spring.jpa.properties.hibernate.format_sql: true
