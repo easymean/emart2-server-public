@@ -1,4 +1,4 @@
-package com.emart2.redirect.website.api;
+package com.emart2.redirect;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
