@@ -1,8 +1,6 @@
 package com.emart2.redirect.website.application;
 
-import com.emart2.redirect.website.dto.CreateWebsiteRequest;
-import com.emart2.redirect.website.dto.UpdateWebsiteRequest;
-import com.emart2.redirect.website.dto.WebsiteResponse;
+import com.emart2.redirect.website.dto.ManageWebsiteDto;
 import com.emart2.redirect.website.entity.WebsiteEntity;
 import com.emart2.redirect.website.service.WebsiteService;
 import org.springframework.stereotype.Component;
@@ -16,15 +14,21 @@ public class WebsiteManager {
     this.websiteService = websiteService;
   }
 
-  public WebsiteResponse createWebsite(CreateWebsiteRequest req) {
-    Long categoryId = req.getCategoryId();
-    WebsiteEntity websiteEntity = websiteService.createWebsite(categoryId, WebsiteMapper.INSTANCE.toEntity(req));
-    return WebsiteMapper.INSTANCE.toDto(websiteEntity);
+
+  public ManageWebsiteDto.Response findWebsite(Long id) {
+    return ManageWebsiteMapper.INSTANCE.toDto(websiteService.findById(id));
   }
 
-  public WebsiteResponse updateWebsite(Long id, UpdateWebsiteRequest req) {
-    WebsiteEntity websiteEntity = websiteService.updateWebsite(id, WebsiteMapper.INSTANCE.toEntity(req));
-    return WebsiteMapper.INSTANCE.toDto(websiteEntity);
+
+  public ManageWebsiteDto.Response createWebsite(ManageWebsiteDto.Create req) {
+    Long categoryId = req.getCategoryId();
+    WebsiteEntity websiteEntity = websiteService.createWebsite(categoryId, ManageWebsiteMapper.INSTANCE.toEntity(req));
+    return ManageWebsiteMapper.INSTANCE.toDto(websiteEntity);
+  }
+
+  public ManageWebsiteDto.Response updateWebsite(Long id, ManageWebsiteDto.Update req) {
+    WebsiteEntity websiteEntity = websiteService.updateWebsite(id, ManageWebsiteMapper.INSTANCE.toEntity(req));
+    return ManageWebsiteMapper.INSTANCE.toDto(websiteEntity);
   }
 
   public void deleteWebsite(Long id) {

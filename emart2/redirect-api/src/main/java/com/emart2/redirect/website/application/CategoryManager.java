@@ -1,8 +1,6 @@
 package com.emart2.redirect.website.application;
 
-import com.emart2.redirect.website.dto.CreateCategoryRequest;
-import com.emart2.redirect.website.dto.UpdateCategoryRequest;
-import com.emart2.redirect.website.dto.CategoryResponse;
+import com.emart2.redirect.website.dto.ManageCategoryDto;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import com.emart2.redirect.website.service.WebsiteCategoryService;
 import org.springframework.stereotype.Component;
@@ -16,19 +14,19 @@ public class CategoryManager {
     this.categoryService = categoryService;
   }
 
-  public CategoryResponse findCategory(Long id) {
-    return CategoryMapper.INSTANCE.toDto(categoryService.findById(id));
+  public ManageCategoryDto.Response findCategory(Long id) {
+    return ManageCategoryMapper.INSTANCE.toDto(categoryService.findById(id));
   }
 
-  public CategoryResponse createCategory(CreateCategoryRequest req) {
-    WebsiteCategoryEntity category = categoryService.createCategory(CategoryMapper.INSTANCE.toEntity(req));
+  public ManageCategoryDto.Response createCategory(ManageCategoryDto.Create req) {
+    WebsiteCategoryEntity category = categoryService.createCategory(ManageCategoryMapper.INSTANCE.toEntity(req));
 
-    return CategoryMapper.INSTANCE.toDto(category);
+    return ManageCategoryMapper.INSTANCE.toDto(category);
   }
 
-  public CategoryResponse updateCategory(Long id, UpdateCategoryRequest req) {
-    WebsiteCategoryEntity category = categoryService.updateCategory(id, CategoryMapper.INSTANCE.toEntity(req));
-    return CategoryMapper.INSTANCE.toDto(category);
+  public ManageCategoryDto.Response updateCategory(Long id, ManageCategoryDto.Update req) {
+    WebsiteCategoryEntity category = categoryService.updateCategory(id, ManageCategoryMapper.INSTANCE.toEntity(req));
+    return ManageCategoryMapper.INSTANCE.toDto(category);
   }
 
   public void deleteCategory(Long id) {

@@ -1,7 +1,6 @@
 package com.emart2.redirect.website.application;
 
-import com.emart2.redirect.website.dto.WebsiteListResponse;
-import com.emart2.redirect.website.dto.WebsiteResponse;
+import com.emart2.redirect.website.dto.WebsiteListDto;
 import com.emart2.redirect.website.service.WebsiteService;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +13,16 @@ public class WebsiteFinder {
     this.websiteService = websiteService;
   }
 
-  public WebsiteResponse findWebsite(Long id) {
-    return WebsiteMapper.INSTANCE.toDto(websiteService.findById(id));
+  public WebsiteListDto searchWebsiteByKeyword(String keyword) {
+    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(websiteService.findWebsiteByKeyword(keyword)));
   }
 
-  public WebsiteListResponse searchWebsiteByKeyword(String keyword) {
-    return new WebsiteListResponse(WebsiteMapper.INSTANCE.toDto(websiteService.findWebsiteByKeyword(keyword)));
+  public WebsiteListDto findWebsiteList(Long categoryId) {
+    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(websiteService.findByCategoryId(categoryId)));
   }
 
-  public WebsiteListResponse findWebsiteList(Long categoryId) {
-    return new WebsiteListResponse(WebsiteMapper.INSTANCE.toDto(websiteService.findByCategoryId(categoryId)));
-  }
-
-  public WebsiteListResponse findFrequentlyVisitedWebsites() {
-    return new WebsiteListResponse(WebsiteMapper.INSTANCE.toDto(websiteService.findFrequentlyVisitedWebsites(5)));
+  public WebsiteListDto findFrequentlyVisitedWebsites() {
+    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(websiteService.findFrequentlyVisitedWebsites(5)));
   }
 
   public void visitWebsite(Long id) {

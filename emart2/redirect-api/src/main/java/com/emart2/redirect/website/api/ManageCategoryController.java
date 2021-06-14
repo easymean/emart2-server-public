@@ -2,9 +2,7 @@ package com.emart2.redirect.website.api;
 
 import com.emart2.redirect.common.CommonResponse;
 import com.emart2.redirect.website.application.CategoryManager;
-import com.emart2.redirect.website.dto.CreateCategoryRequest;
-import com.emart2.redirect.website.dto.UpdateCategoryRequest;
-import com.emart2.redirect.website.dto.CategoryResponse;
+import com.emart2.redirect.website.dto.ManageCategoryDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,18 +17,19 @@ public class ManageCategoryController {
   }
 
   @GetMapping("/{id}")
-  public CommonResponse<CategoryResponse> getCategoryById(@PathVariable("id") Long id) {
+  public CommonResponse<ManageCategoryDto.Response> getCategoryById(@PathVariable("id") Long id) {
     return CommonResponse.ok("success", categoryManager.findCategory(id));
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
-  public CommonResponse<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
+  public CommonResponse<ManageCategoryDto.Response> createCategory(@RequestBody ManageCategoryDto.Create request) {
     return CommonResponse.ok("success", categoryManager.createCategory(request));
   }
 
   @PutMapping("/{id}")
-  public CommonResponse<CategoryResponse> updateCategory(@PathVariable("id") Long id, @RequestBody UpdateCategoryRequest request) {
+  public CommonResponse<ManageCategoryDto.Response> updateCategory(@PathVariable("id") Long id,
+                                                                   @RequestBody ManageCategoryDto.Update request) {
     return CommonResponse.ok("success", categoryManager.updateCategory(id, request));
   }
 
