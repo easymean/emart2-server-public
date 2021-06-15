@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CategoryListFinder {
+public class CategoryFinder {
   private final WebsiteCategoryService websiteCategoryService;
 
-  public CategoryListFinder(WebsiteCategoryService websiteCategoryService) {
+  public CategoryFinder(WebsiteCategoryService websiteCategoryService) {
     this.websiteCategoryService = websiteCategoryService;
   }
 

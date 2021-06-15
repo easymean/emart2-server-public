@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/websites")
-public class FindWebsiteController {
+public class FindWebsiteListController {
 
   private final WebsiteFinder websiteFinder;
 
-  public FindWebsiteController(WebsiteFinder websiteFinder) {
+  public FindWebsiteListController(WebsiteFinder websiteFinder) {
     this.websiteFinder = websiteFinder;
   }
 
