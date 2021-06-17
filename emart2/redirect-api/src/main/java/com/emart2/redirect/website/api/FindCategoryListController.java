@@ -2,7 +2,7 @@ package com.emart2.redirect.website.api;
 
 import com.emart2.redirect.common.CommonResponse;
 import com.emart2.redirect.website.application.CategoryFinder;
-import com.emart2.redirect.website.dto.CategoryListResponse;
+import com.emart2.redirect.website.dto.CategoryListDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +16,7 @@ public class FindCategoryListController {
   }
 
   @GetMapping
-  public CommonResponse<CategoryListResponse> getCategoryList() {
+  public CommonResponse<CategoryListDto> getCategoryList() {
     return CommonResponse.ok("success", categoryFinder.findCategoryList());
   }
 

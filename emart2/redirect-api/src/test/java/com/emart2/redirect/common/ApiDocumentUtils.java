@@ -1,4 +1,4 @@
-package com.emart2.redirect.website.api;
+package com.emart2.redirect.common;
 
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 
@@ -9,8 +9,8 @@ public interface ApiDocumentUtils {
   static OperationRequestPreprocessor getDocumentRequest() {
     return preprocessRequest(
         modifyUris()
-            .scheme("https")
-            .host("docs.api.com")
+            .scheme("http")
+            .host("localhost:8080")
             .removePort(),
         prettyPrint());
   }
