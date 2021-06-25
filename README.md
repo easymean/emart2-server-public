@@ -3,6 +3,7 @@
 ---
 
 ## 실행
+`cd emart2` </br>
 `gradlew clean build` </br>
 `gradlew :redirect-api:bootRun`
 
@@ -21,5 +22,5 @@
 | repository | JPA Repository |
 | service | 비즈니스 로직 |
 | api | REST API 컨트롤러 |
-| application |  |
+| application | service의 결과를 맵퍼에 맵핑 |
 | dto | dto |
