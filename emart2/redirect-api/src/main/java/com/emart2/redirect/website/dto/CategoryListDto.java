@@ -1,6 +1,5 @@
 package com.emart2.redirect.website.dto;
 
-import com.emart2.redirect.type.StageType;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -33,18 +32,13 @@ public class CategoryListDto {
     private Long id;
     private String name;
     private String description;
-    private String url;
-    private StageType stage;
-    private boolean dev;
+
 
     @Builder
-    public Response(Long id, String name, String description, String url, StageType stage, boolean dev) {
+    public Response(Long id, String name, String description) {
       this.id = id;
       this.name = name;
       this.description = description;
-      this.url = url;
-      this.stage = stage;
-      this.dev = dev;
     }
   }
 }
