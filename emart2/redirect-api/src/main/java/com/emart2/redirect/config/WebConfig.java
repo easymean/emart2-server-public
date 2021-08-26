@@ -18,7 +18,6 @@ public class WebConfig {
     return enumMapper;
   }
 
-
   @Bean
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {
