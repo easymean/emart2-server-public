@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/auth")
 public class LoginController {
 
-  @PostMapping
+  @PostMapping("/login")
   public CommonResponse<LoginDto.Response> login(@RequestBody LoginDto.Login req) {
+    return null;
+  }
+
+  @GetMapping("/signup")
+  public CommonResponse<LoginDto.Response> signup(@RequestBody LoginDto.Login req) {
+
     return null;
   }
 }
