@@ -9,24 +9,26 @@ import org.springframework.stereotype.Component;
 public class CategoryManager {
 
   private final WebsiteCategoryService categoryService;
+  private final ManageCategoryMapper mapper;
 
-  public CategoryManager(WebsiteCategoryService categoryService) {
+  public CategoryManager(WebsiteCategoryService categoryService, ManageCategoryMapper mapper) {
     this.categoryService = categoryService;
+    this.mapper = mapper;
   }
 
   public ManageCategoryDto.Response findCategory(Long id) {
-    return ManageCategoryMapper.INSTANCE.toDto(categoryService.findById(id));
+    return mapper.toDto(categoryService.findById(id));
   }
 
   public ManageCategoryDto.Response createCategory(ManageCategoryDto.Create req) {
-    WebsiteCategoryEntity category = categoryService.createCategory(ManageCategoryMapper.INSTANCE.toEntity(req));
+    WebsiteCategoryEntity category = categoryService.createCategory(mapper.toEntity(req));
 
-    return ManageCategoryMapper.INSTANCE.toDto(category);
+    return mapper.toDto(category);
   }
 
   public ManageCategoryDto.Response updateCategory(Long id, ManageCategoryDto.Update req) {
-    WebsiteCategoryEntity category = categoryService.updateCategory(id, ManageCategoryMapper.INSTANCE.toEntity(req));
-    return ManageCategoryMapper.INSTANCE.toDto(category);
+    WebsiteCategoryEntity category = categoryService.updateCategory(id, mapper.toEntity(req));
+    return mapper.toDto(category);
   }
 
   public void deleteCategory(Long id) {
