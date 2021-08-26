@@ -2,7 +2,6 @@ package com.emart2.redirect.user.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +14,6 @@ import java.util.Collection;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class UserEntity implements UserDetails {
 
   @Id
@@ -23,14 +21,17 @@ public class UserEntity implements UserDetails {
   private Long id;
 
   @Column(unique = true)
-  private String userId;
-  private String password;
   private String email;
+  private String password;
+
   private String role;
 
+  public UserEntity() {
+  }
+
   @Builder
-  public UserEntity(String userId, String password, String role) {
-    this.userId = userId;
+  public UserEntity(String email, String password, String role) {
+    this.email = email;
     this.password = password;
     this.role = role;
   }
@@ -46,7 +47,7 @@ public class UserEntity implements UserDetails {
 
   @Override
   public String getUsername() {
-    return userId;
+    return email;
   }
 
   @Override

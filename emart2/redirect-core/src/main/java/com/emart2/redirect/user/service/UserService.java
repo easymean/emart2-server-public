@@ -26,12 +26,12 @@ public class UserService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserEntity user = userRepository.findByUserId(username);
+    UserEntity user = userRepository.findByEmail(username);
     if (user == null) {
       throw new UsernameNotFoundException(username);
     }
     return UserEntity.builder()
-        .userId(user.getUserId())
+        .email(user.getEmail())
         .password(user.getPassword())
         .role(user.getRole())
         .build();

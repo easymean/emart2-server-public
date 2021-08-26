@@ -15,7 +15,10 @@ public class LoginManager {
     this.mapper = mapper;
   }
 
-  public void Login(LoginDto.Login req) {
+  public void signUp(LoginDto.Login req) {
     userService.createUser(mapper.toEntity(req));
+  }
+
+  public void login(LoginDto.Login req) {
   }
 }
