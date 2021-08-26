@@ -19,10 +19,9 @@ dependencies {
     implementation "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
 
-
     asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:$restdocsVersion"
+    
 }
 
 test {
