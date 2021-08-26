@@ -1,11 +1,11 @@
 package com.emart2.redirect.website.application;
 
-import com.emart2.redirect.common.CommonMapper;
 import com.emart2.redirect.website.dto.ManageWebsiteDto;
 import com.emart2.redirect.website.entity.WebsiteEntity;
+import org.mapstruct.Mapper;
 
-
-public interface ManageWebsiteMapper extends CommonMapper {
+@Mapper(componentModel = "spring")
+public interface ManageWebsiteMapper {
 
   WebsiteEntity toEntity(ManageWebsiteDto.Create dto);
 
