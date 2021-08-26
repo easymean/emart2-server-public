@@ -7,4 +7,4 @@ spring:
   profiles:
     include:
       - auth
-      - dev_maria
+      - local_h2
