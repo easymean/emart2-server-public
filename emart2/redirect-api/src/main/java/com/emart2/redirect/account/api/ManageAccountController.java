@@ -1,11 +1,9 @@
 package com.emart2.redirect.account.api;
 
 import com.emart2.redirect.account.dto.ManageAccountDto;
-import com.emart2.redirect.application.AccountManager;
+import com.emart2.redirect.account.application.AccountManager;
 import com.emart2.redirect.common.CommonResponse;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 
 @RestController
