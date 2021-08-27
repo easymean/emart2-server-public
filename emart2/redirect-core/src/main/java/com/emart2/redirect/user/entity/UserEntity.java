@@ -1,5 +1,6 @@
 package com.emart2.redirect.user.entity;
 
+import com.emart2.redirect.account.entity.AccountEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,14 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
+@Table(name = "user")
 public class UserEntity implements UserDetails {
 
   @Id
@@ -27,6 +27,14 @@ public class UserEntity implements UserDetails {
 
   @Setter
   private String role;
+
+  @OneToMany
+  private List<AccountEntity> accountList;
+
+  public void addAccount(AccountEntity accountEntity){
+    this.accountList.add(accountEntity);
+  }
+
 
   public UserEntity() {
   }
