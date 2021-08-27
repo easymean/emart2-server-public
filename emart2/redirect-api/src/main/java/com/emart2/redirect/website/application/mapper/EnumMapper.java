@@ -1,4 +1,4 @@
-package com.emart2.redirect.website.application;
+package com.emart2.redirect.website.application.mapper;
 
 import com.emart2.redirect.common.EnumMapperValue;
 import com.emart2.redirect.type.EnumMapperType;

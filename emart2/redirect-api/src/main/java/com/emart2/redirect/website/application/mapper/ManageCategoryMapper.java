@@ -1,4 +1,4 @@
-package com.emart2.redirect.website.application;
+package com.emart2.redirect.website.application.mapper;
 
 import com.emart2.redirect.website.dto.ManageCategoryDto;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;

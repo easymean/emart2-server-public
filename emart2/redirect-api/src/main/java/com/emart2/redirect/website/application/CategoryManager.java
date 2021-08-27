@@ -1,17 +1,18 @@
 package com.emart2.redirect.website.application;
 
+import com.emart2.redirect.website.application.mapper.ManageCategoryMapper;
 import com.emart2.redirect.website.dto.ManageCategoryDto;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
-import com.emart2.redirect.website.service.WebsiteCategoryService;
+import com.emart2.redirect.website.service.ManageWebsiteCategoryService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryManager {
 
-  private final WebsiteCategoryService categoryService;
+  private final ManageWebsiteCategoryService categoryService;
   private final ManageCategoryMapper mapper;
 
-  public CategoryManager(WebsiteCategoryService categoryService, ManageCategoryMapper mapper) {
+  public CategoryManager(ManageWebsiteCategoryService categoryService, ManageCategoryMapper mapper) {
     this.categoryService = categoryService;
     this.mapper = mapper;
   }
