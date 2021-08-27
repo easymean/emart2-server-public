@@ -1,4 +1,4 @@
-package com.emart2.redirect.application;
+package com.emart2.redirect.account.application;
 
 import com.emart2.redirect.account.dto.ManageAccountDto;
 import com.emart2.redirect.account.entity.AccountEntity;
