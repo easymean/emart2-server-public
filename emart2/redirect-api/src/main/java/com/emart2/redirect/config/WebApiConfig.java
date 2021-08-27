@@ -1,7 +1,7 @@
 package com.emart2.redirect.config;
 
 import com.emart2.redirect.type.StageType;
-import com.emart2.redirect.website.application.EnumMapper;
+import com.emart2.redirect.website.application.mapper.EnumMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

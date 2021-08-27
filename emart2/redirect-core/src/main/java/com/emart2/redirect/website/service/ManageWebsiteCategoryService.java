@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class WebsiteCategoryService {
+public class ManageWebsiteCategoryService {
   WebsiteCategoryRepository websiteCategoryRepository;
 
-  public WebsiteCategoryService(WebsiteCategoryRepository websiteCategoryRepository) {
+  public ManageWebsiteCategoryService(WebsiteCategoryRepository websiteCategoryRepository) {
     this.websiteCategoryRepository = websiteCategoryRepository;
   }
 
