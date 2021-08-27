@@ -1,16 +1,17 @@
 package com.emart2.redirect.website.application;
 
+import com.emart2.redirect.website.application.mapper.FindWebsiteListMapper;
 import com.emart2.redirect.website.dto.WebsiteListDto;
 import com.emart2.redirect.website.service.FindWebsiteListService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WebsiteFinder {
+public class WebsiteListFinder {
 
   private final FindWebsiteListService findWebsiteListService;
   private final FindWebsiteListMapper mapper;
 
-  public WebsiteFinder(FindWebsiteListService findWebsiteListService, FindWebsiteListMapper mapper) {
+  public WebsiteListFinder(FindWebsiteListService findWebsiteListService, FindWebsiteListMapper mapper) {
     this.findWebsiteListService = findWebsiteListService;
     this.mapper = mapper;
   }
@@ -25,6 +26,10 @@ public class WebsiteFinder {
 
   public WebsiteListDto findFrequentlyVisitedWebsites() {
     return new WebsiteListDto(mapper.toDto(findWebsiteListService.findFrequentlyVisitedWebsites(5)));
+  }
+
+  public void visitWebsite(Long id) {
+    findWebsiteListService.increaseFrequencyById(id);
   }
 
 }

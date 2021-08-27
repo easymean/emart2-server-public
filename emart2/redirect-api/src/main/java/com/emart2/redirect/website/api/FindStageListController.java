@@ -1,7 +1,7 @@
 package com.emart2.redirect.website.api;
 
 import com.emart2.redirect.common.CommonResponse;
-import com.emart2.redirect.website.application.EnumMapper;
+import com.emart2.redirect.website.application.mapper.EnumMapper;
 import com.emart2.redirect.website.dto.EnumResponseList;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

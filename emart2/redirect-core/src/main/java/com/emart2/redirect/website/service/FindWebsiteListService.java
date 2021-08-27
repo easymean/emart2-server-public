@@ -37,5 +37,9 @@ public class FindWebsiteListService {
     return websiteRepository.findAllByNameContainsAndIsActiveTrue(keyword);
   }
 
+  public void increaseFrequencyById(Long id) {
+    websiteRepository.increaseFrequency(id);
+  }
+
 
 }
