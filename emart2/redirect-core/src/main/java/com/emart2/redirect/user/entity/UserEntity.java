@@ -2,6 +2,7 @@ package com.emart2.redirect.user.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ public class UserEntity implements UserDetails {
   private String email;
   private String password;
 
+  @Setter
   private String role;
 
   public UserEntity() {
