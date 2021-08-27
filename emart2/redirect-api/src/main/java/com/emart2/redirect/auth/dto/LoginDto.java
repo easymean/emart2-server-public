@@ -11,11 +11,11 @@ public class LoginDto {
   @Getter
   @Builder
   public static class Login {
-    private final String ID;
+    private final String email;
     private final String password;
 
-    public Login(String ID, String password) {
-      this.ID = ID;
+    public Login(String email, String password) {
+      this.email = email;
       this.password = password;
     }
   }

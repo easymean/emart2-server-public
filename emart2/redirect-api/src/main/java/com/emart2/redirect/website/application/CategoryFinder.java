@@ -10,14 +10,16 @@ import java.util.List;
 @Component
 public class CategoryFinder {
   private final WebsiteCategoryService websiteCategoryService;
+  private final FindCategoryListMapper mapper;
 
-  public CategoryFinder(WebsiteCategoryService websiteCategoryService) {
+  public CategoryFinder(WebsiteCategoryService websiteCategoryService, FindCategoryListMapper mapper) {
     this.websiteCategoryService = websiteCategoryService;
+    this.mapper = mapper;
   }
 
   public CategoryListDto findCategoryList() {
     List<WebsiteCategoryEntity> categories = websiteCategoryService.getList();
-    return new CategoryListDto(FindCategoryListMapper.INSTANCE.toDto(categories));
+    return new CategoryListDto(mapper.toDto(categories));
   }
 
 

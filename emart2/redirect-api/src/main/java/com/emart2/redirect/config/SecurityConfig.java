@@ -9,9 +9,11 @@ import org.springframework.web.cors.CorsUtils;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception{
+  protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable();
-//    .authorizeRequests()
-//    .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+    http.authorizeRequests()
+        .mvcMatchers("/admin/**").hasRole("ADMIN")
+        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
   }
+
 }

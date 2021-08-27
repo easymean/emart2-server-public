@@ -8,21 +8,23 @@ import org.springframework.stereotype.Component;
 public class WebsiteFinder {
 
   private final FindWebsiteListService findWebsiteListService;
+  private final FindWebsiteListMapper mapper;
 
-  public WebsiteFinder(FindWebsiteListService findWebsiteListService) {
+  public WebsiteFinder(FindWebsiteListService findWebsiteListService, FindWebsiteListMapper mapper) {
     this.findWebsiteListService = findWebsiteListService;
+    this.mapper = mapper;
   }
 
   public WebsiteListDto searchWebsiteByKeyword(String keyword) {
-    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(findWebsiteListService.findWebsiteByKeyword(keyword)));
+    return new WebsiteListDto(mapper.toDto(findWebsiteListService.findWebsiteByKeyword(keyword)));
   }
 
   public WebsiteListDto findWebsiteList(Long categoryId) {
-    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(findWebsiteListService.findByCategoryId(categoryId)));
+    return new WebsiteListDto(mapper.toDto(findWebsiteListService.findByCategoryId(categoryId)));
   }
 
   public WebsiteListDto findFrequentlyVisitedWebsites() {
-    return new WebsiteListDto(FindWebsiteListMapper.INSTANCE.toDto(findWebsiteListService.findFrequentlyVisitedWebsites(5)));
+    return new WebsiteListDto(mapper.toDto(findWebsiteListService.findFrequentlyVisitedWebsites(5)));
   }
 
 }

@@ -2,6 +2,7 @@ package com.emart2.redirect.website.application;
 
 import com.emart2.redirect.common.EnumMapperValue;
 import com.emart2.redirect.type.EnumMapperType;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -10,12 +11,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 public class EnumMapper {
 
   private Map<String, List<EnumMapperValue>> factory = new LinkedHashMap<>();
-
-  public EnumMapper() {
-  }
 
   public void put(String key, Class<? extends EnumMapperType> e) {
     factory.put(key, toEnumValues(e));
