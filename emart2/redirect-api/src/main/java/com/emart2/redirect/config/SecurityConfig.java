@@ -1,6 +1,9 @@
 package com.emart2.redirect.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -11,22 +14,22 @@ import org.springframework.web.cors.CorsUtils;
 import java.util.Collection;
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()); //favicon.ico 요청 무시
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable();
     http.authorizeRequests()
+        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
         .mvcMatchers("/admin/**").hasRole("ADMIN")
-        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+        .anyRequest().authenticated();
   }
 
-  public void tmpFilter(){
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Object principal = authentication.getPrincipal();
-    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-    Object credentials = authentication.getCredentials();
-    boolean authenticated = authentication.isAuthenticated();
-  }
 
 }
