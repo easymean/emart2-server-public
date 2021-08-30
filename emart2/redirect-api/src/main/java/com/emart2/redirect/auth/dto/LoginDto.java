@@ -9,12 +9,14 @@ public class LoginDto {
   }
 
   @Getter
-  @Builder
   public static class Login {
+    private final String username;
     private final String email;
     private final String password;
 
-    public Login(String email, String password) {
+    @Builder
+    public Login(String username, String email, String password) {
+      this.username = username;
       this.email = email;
       this.password = password;
     }

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/auth")
-public class LoginController {
+public class AuthController {
   private final LoginManager loginManager;
 
-  public LoginController(LoginManager loginManager) {
+  public AuthController(LoginManager loginManager) {
     this.loginManager = loginManager;
   }
 
