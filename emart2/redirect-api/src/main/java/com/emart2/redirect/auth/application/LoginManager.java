@@ -1,7 +1,6 @@
 package com.emart2.redirect.auth.application;
 
 import com.emart2.redirect.auth.AuthService;
-import com.emart2.redirect.auth.UserAccount;
 import com.emart2.redirect.auth.dto.LoginDto;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ public class LoginManager {
     this.mapper = mapper;
   }
 
-  public void signUp(LoginDto.Login req) {
+  public void signUp(LoginDto.Signup req) {
     authService.createUser(mapper.toEntity(req));
   }
 

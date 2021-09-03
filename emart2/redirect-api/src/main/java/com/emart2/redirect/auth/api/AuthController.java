@@ -21,7 +21,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public CommonResponse<Void> signup(@RequestBody LoginDto.Login req) {
+  public CommonResponse<Void> signup(@RequestBody LoginDto.Signup req) {
     loginManager.signUp(req);
     return CommonResponse.ok("success", null);
   }

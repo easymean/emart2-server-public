@@ -10,4 +10,8 @@ public interface LoginMapper {
   @Mapping(target = "role", ignore = true)
   UserEntity toEntity(LoginDto.Login req);
 
+  @Mapping(target = "role", ignore = true)
+  @Mapping(target = "email", ignore = true)
+  UserEntity toEntity(LoginDto.Signup req);
+
 }
