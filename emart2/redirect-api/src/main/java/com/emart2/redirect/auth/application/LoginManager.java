@@ -1,6 +1,7 @@
 package com.emart2.redirect.auth.application;
 
 import com.emart2.redirect.auth.AuthService;
+import com.emart2.redirect.auth.UserAccount;
 import com.emart2.redirect.auth.dto.LoginDto;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +21,6 @@ public class LoginManager {
   }
 
   public void login(LoginDto.Login req) {
+    authService.login(req.getUsername(), req.getPassword());
   }
 }
