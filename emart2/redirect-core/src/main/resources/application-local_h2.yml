@@ -18,3 +18,4 @@ spring.jpa:
     use-new-id-generator-mappings: false
 
 spring.jackson.property-naming-strategy: SNAKE_CASE
+logging.level.org.hibernate.SQL: debug

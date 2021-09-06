@@ -22,7 +22,10 @@ public class UserEntity {
   @Column(unique = true)
   private String username;
 
+  @Setter
   private String email;
+
+  @Setter
   private String password;
 
   @Setter
@@ -46,7 +49,7 @@ public class UserEntity {
     this.accountList.add(accountEntity);
   }
 
-  public void encodePassword(PasswordEncoder passwordEncoder) {
+  public void encodePassword(PasswordEncoder passwordEncoder){
     this.password = passwordEncoder.encode(this.password);
   }
 

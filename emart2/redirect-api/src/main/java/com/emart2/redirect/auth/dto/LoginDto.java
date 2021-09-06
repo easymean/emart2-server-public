@@ -4,7 +4,18 @@ import lombok.*;
 
 public class LoginDto {
 
+  @Getter @Setter
   public static class Response {
+    private String username;
+    private String email;
+    private String password;
+
+    @Builder
+    public Response(String username, String email, String password) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
+    }
 
   }
 
