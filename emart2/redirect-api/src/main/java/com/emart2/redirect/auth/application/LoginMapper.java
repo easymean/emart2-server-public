@@ -7,7 +7,12 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface LoginMapper {
+  @Mapping(target = "email", ignore = true)
   @Mapping(target = "role", ignore = true)
   UserEntity toEntity(LoginDto.Login req);
 
+  @Mapping(target = "role", ignore = true)
+  UserEntity toEntity(LoginDto.Signup req);
+
+  LoginDto.Response toDto(UserEntity user);
 }

@@ -1,6 +1,6 @@
 #FileLock
-#Sun Aug 29 01:13:24 KST 2021
-server=192.168.56.1\:51573
-hostName=DESKTOP-7TKKCGO
+#Mon Sep 06 16:59:09 KST 2021
+server=10.147.5.154\:64977
+hostName=AE0-W-N14355.ssg.global
 method=file
-id=17b8d8958de86e4232d035ae70e5e731a433d1fdd01
+id=17bba1e3783a8a0f3010018faeee4a6427d2fa0a13a
