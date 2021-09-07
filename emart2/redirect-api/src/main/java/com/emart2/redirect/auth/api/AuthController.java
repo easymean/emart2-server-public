@@ -3,6 +3,10 @@ package com.emart2.redirect.auth.api;
 import com.emart2.redirect.auth.application.LoginManager;
 import com.emart2.redirect.common.CommonResponse;
 import com.emart2.redirect.auth.dto.LoginDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -12,17 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/v1/auth")
 public class AuthController {
   private final LoginManager loginManager;
-
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
   public AuthController(LoginManager loginManager) {
     this.loginManager = loginManager;
   }
 
   @PostMapping("/login")
-  public CommonResponse<LoginDto.Response> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
+  public ResponseEntity<Void> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
     String token = loginManager.login(req);
     Cookie cookie = new Cookie("accessToken", token);
     res.addCookie(cookie);
-    return CommonResponse.ok("success", null);
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   @PostMapping("/signup")

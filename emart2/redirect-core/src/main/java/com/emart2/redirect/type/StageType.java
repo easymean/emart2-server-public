@@ -1,11 +1,11 @@
 package com.emart2.redirect.type;
 
 public enum StageType implements EnumMapperType {
-  WEB_FRONT("웹프론트", "WEB_FRONT"),
-  WEB_BOS("웹보스", "WEB_BOS"),
+  WEB("웹", "WEB"),
   DEPLOY("배포", "DEPLOY"),
   ADMIN("관리", "ADMIN"),
   MONITOR("모니터링", "MONITOR"),
+  CONFIG("형상관리", "CONFIG"),
   ;
 
   private final String title;
