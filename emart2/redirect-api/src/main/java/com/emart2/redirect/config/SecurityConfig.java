@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    //http.addFilterBefore(new JwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    http.cors().and()
+    http
+        .cors().and()
         .csrf().disable()
         .httpBasic().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 사용하지 않음
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
         .mvcMatchers("/auth/login", "/auth/signup").permitAll() // 로그인 회원가입 페이지만 접근 가능
         .mvcMatchers("/admin/**").hasRole("ADMIN")
-        .anyRequest().authenticated() // 서비스 이용을 위해선 인증받은 사용자만 허가 가능
+        //.anyRequest().authenticated() // 서비스 이용을 위해선 인증받은 사용자만 허가 가능
     .and()
       .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
     ;
