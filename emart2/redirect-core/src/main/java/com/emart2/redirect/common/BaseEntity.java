@@ -28,6 +28,8 @@ public abstract class BaseEntity {
   protected boolean isActive;
 
   public BaseEntity() {
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
     this.isActive = true;
   }
 
