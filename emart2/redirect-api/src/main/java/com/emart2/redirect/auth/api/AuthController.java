@@ -6,6 +6,7 @@ import com.emart2.redirect.auth.dto.LoginDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthController {
   private final LoginManager loginManager;
   private Logger logger = LoggerFactory.getLogger(this.getClass());
+
   public AuthController(LoginManager loginManager) {
     this.loginManager = loginManager;
   }
@@ -24,8 +26,15 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<Void> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
     String token = loginManager.login(req);
-    Cookie cookie = new Cookie("accessToken", token);
-    res.addCookie(cookie);
+    ResponseCookie cookie = ResponseCookie.from("accessToken", token)
+        .domain("localhost")
+        .sameSite("None")
+        .secure(true)
+        .path("/")
+        .build();
+//    Cookie cookie = new Cookie("accessToken", token);
+//    res.addCookie(cookie);
+    res.addHeader("Set-Cookie", cookie.toString());
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
