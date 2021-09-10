@@ -11,7 +11,8 @@ build/
 .project
 .settings
 .springBeans
-.db
+db.mv.db
+db.trace.db
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
