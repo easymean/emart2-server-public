@@ -8,6 +8,7 @@ import com.emart2.redirect.website.repository.WebsiteCategoryRepository;
 import com.emart2.redirect.website.repository.WebsiteRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,8 @@ public class ManageWebsiteService {
           throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
         });
   }
-  
+
+  @Transactional
   public WebsiteEntity createWebsite(Long categoryId, WebsiteEntity websiteEntity) {
     websiteCategoryRepository.findByIdAndIsActiveIsTrue(categoryId)
         .map(category -> {

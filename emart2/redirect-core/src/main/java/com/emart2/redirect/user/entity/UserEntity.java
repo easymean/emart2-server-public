@@ -29,6 +29,9 @@ public class UserEntity {
   private String password;
 
   @Setter
+  private Boolean authStatus;
+
+  @Setter
   private String role;
 
   @OneToMany
@@ -43,13 +46,14 @@ public class UserEntity {
     this.email = email;
     this.password = password;
     this.role = role;
+    this.authStatus = false;
   }
 
   public void addAccount(AccountEntity accountEntity) {
     this.accountList.add(accountEntity);
   }
 
-  public void encodePassword(PasswordEncoder passwordEncoder){
+  public void encodePassword(PasswordEncoder passwordEncoder) {
     this.password = passwordEncoder.encode(this.password);
   }
 

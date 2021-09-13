@@ -43,4 +43,9 @@ public class AuthController {
     loginManager.signUp(req);
     return CommonResponse.ok("success", null);
   }
+
+  @PostMapping("/id")
+  public CommonResponse<Boolean> checkId(@RequestBody LoginDto.Signup req) {
+    return CommonResponse.ok("success", loginManager.checkId(req));
+  }
 }

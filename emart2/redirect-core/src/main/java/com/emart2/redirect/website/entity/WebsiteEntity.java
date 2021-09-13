@@ -42,7 +42,7 @@ public class WebsiteEntity extends BaseEntity {
   private boolean dev;
 
   @Setter
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "categoryId")
   private WebsiteCategoryEntity category;
 
