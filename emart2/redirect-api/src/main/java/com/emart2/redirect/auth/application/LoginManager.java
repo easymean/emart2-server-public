@@ -27,4 +27,8 @@ public class LoginManager {
     UserAccount user = authService.login(req.getUsername(), req.getPassword());
     return jwtTokenProvider.generateToken(user);
   }
+
+  public Boolean checkId(LoginDto.Signup req) {
+    return authService.checkId(req.getUsername());
+  }
 }
