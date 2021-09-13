@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FindCategoryListMapper {
 
-  @Mapping(source = "colOrder", target = "order")
+  @Mapping(target = "colOrder", ignore = true)
   List<CategoryListDto.Response> toDto(List<WebsiteCategoryEntity> list);
 }
