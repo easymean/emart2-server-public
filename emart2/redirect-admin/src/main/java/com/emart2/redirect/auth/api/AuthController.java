@@ -28,7 +28,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
+  public ResponseEntity<Void> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
     String token = loginManager.login(req);
     ResponseCookie cookie = ResponseCookie.from("accessToken", token)
         .domain("localhost")
@@ -39,11 +39,7 @@ public class AuthController {
 //    Cookie cookie = new Cookie("accessToken", token);
 //    res.addCookie(cookie);
     res.addHeader("Set-Cookie", cookie.toString());
-    //return new ResponseEntity<>(HttpStatus.OK);
-    Map<String, String> mp = new HashMap<>();
-    mp.put("token", token);
-    return ResponseEntity.ok()
-        .body(mp);
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   @PostMapping("/signup")
