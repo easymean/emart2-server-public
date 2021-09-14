@@ -26,7 +26,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
+  public ResponseEntity<Void> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
     String token = loginManager.login(req);
     ResponseCookie cookie = ResponseCookie.from("accessToken", token)
         .domain("localhost")
