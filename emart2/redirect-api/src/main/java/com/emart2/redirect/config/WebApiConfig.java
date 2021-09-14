@@ -26,7 +26,6 @@ public class WebApiConfig {
         registry.addMapping("/**")
             .allowedOrigins("http://localhost:80", "http://localhost:3000", "http://localhost:8080")
             .allowCredentials(true)
-            //.allowedHeaders("*")
             .allowedMethods(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
