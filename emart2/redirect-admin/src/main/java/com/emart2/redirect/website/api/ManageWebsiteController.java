@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/admin/websites")
+@RequestMapping("/v1/websites")
 public class ManageWebsiteController {
 
   private final WebsiteManager websiteManager;

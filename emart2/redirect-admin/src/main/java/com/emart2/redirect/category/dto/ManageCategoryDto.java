@@ -1,6 +1,9 @@
-package com.emart2.redirect.website.dto;
+package com.emart2.redirect.category.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class ManageCategoryDto {
 

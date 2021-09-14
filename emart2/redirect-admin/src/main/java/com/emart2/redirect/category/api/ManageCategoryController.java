@@ -1,13 +1,13 @@
-package com.emart2.redirect.website.api;
+package com.emart2.redirect.category.api;
 
+import com.emart2.redirect.category.application.CategoryManager;
+import com.emart2.redirect.category.dto.ManageCategoryDto;
 import com.emart2.redirect.common.CommonResponse;
-import com.emart2.redirect.website.application.CategoryManager;
-import com.emart2.redirect.website.dto.ManageCategoryDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/admin/categories")
+@RequestMapping("/v1/categories")
 public class ManageCategoryController {
 
   private final CategoryManager categoryManager;

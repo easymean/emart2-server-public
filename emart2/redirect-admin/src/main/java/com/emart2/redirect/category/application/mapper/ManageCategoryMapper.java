@@ -1,6 +1,6 @@
-package com.emart2.redirect.website.application.mapper;
+package com.emart2.redirect.category.application.mapper;
 
-import com.emart2.redirect.website.dto.ManageCategoryDto;
+import com.emart2.redirect.category.dto.ManageCategoryDto;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

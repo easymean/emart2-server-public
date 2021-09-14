@@ -1,7 +1,10 @@
 package com.emart2.redirect.website.dto;
 
 import com.emart2.redirect.type.StageType;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class ManageWebsiteDto {
 

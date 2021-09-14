@@ -1,7 +1,7 @@
-package com.emart2.redirect.website.application;
+package com.emart2.redirect.category.application;
 
-import com.emart2.redirect.website.application.mapper.ManageCategoryMapper;
-import com.emart2.redirect.website.dto.ManageCategoryDto;
+import com.emart2.redirect.category.application.mapper.ManageCategoryMapper;
+import com.emart2.redirect.category.dto.ManageCategoryDto;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import com.emart2.redirect.website.service.ManageWebsiteCategoryService;
 import org.springframework.stereotype.Component;

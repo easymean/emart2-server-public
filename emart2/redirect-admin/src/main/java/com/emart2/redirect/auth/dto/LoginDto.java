@@ -1,6 +1,8 @@
 package com.emart2.redirect.auth.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 public class LoginDto {
 
@@ -34,7 +36,7 @@ public class LoginDto {
       this.username = username;
       this.email = email;
       this.password = password;
-      this.role = "USER";
+      this.role = "ADMIN";
     }
   }
 

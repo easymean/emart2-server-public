@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 
 @Configuration
-public class WebConfig {
+public class WebCoreConfig {
 
   /*QueryDsl*/
   @PersistenceContext

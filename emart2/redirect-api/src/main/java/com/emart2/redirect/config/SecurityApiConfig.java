@@ -14,10 +14,10 @@ import org.springframework.web.cors.CorsUtils;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityApiConfig extends WebSecurityConfigurerAdapter {
   private final JwtTokenProvider jwtTokenProvider;
 
-  public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+  public SecurityApiConfig(JwtTokenProvider jwtTokenProvider) {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
@@ -37,10 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
         .mvcMatchers("/auth/login", "/auth/signup").permitAll() // 로그인 회원가입 페이지만 접근 가능
-        .mvcMatchers("/admin/**").hasRole("ADMIN")
+        .mvcMatchers("/**").hasRole("USER")
         //.anyRequest().authenticated() // 서비스 이용을 위해선 인증받은 사용자만 허가 가능
-    .and()
-      .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+        .and()
+        .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
     ;
   }
 

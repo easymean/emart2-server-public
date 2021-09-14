@@ -14,9 +14,10 @@ buildscript {
     }
 }
 
+def admin = project(":redirect-admin")
 def api = project(":redirect-api")
 def core = project(":redirect-core")
-def multiModules = [api, core]
+def multiModules = [admin, api, core]
 
 configure(multiModules) {
 
