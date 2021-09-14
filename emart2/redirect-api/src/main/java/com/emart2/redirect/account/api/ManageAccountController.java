@@ -2,7 +2,7 @@ package com.emart2.redirect.account.api;
 
 import com.emart2.redirect.account.dto.ManageAccountDto;
 import com.emart2.redirect.account.application.AccountManager;
-import com.emart2.redirect.auth.UserAccount;
+import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.common.CommonResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

@@ -1,16 +1,15 @@
 package com.emart2.redirect.website.service;
 
-import com.emart2.redirect.exception.NotFoundException;
 import com.emart2.redirect.type.ErrorType;
-import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import com.emart2.redirect.website.entity.WebsiteEntity;
+import com.emart2.redirect.website.exception.CategoryNotFoundException;
+import com.emart2.redirect.website.exception.SiteNotFoundException;
 import com.emart2.redirect.website.repository.WebsiteCategoryRepository;
 import com.emart2.redirect.website.repository.WebsiteRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -26,7 +25,7 @@ public class ManageWebsiteService {
   public WebsiteEntity findById(Long id) {
     return websiteRepository.findByIdAndIsActiveIsTrue(id)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
+          throw new SiteNotFoundException();
         });
   }
 
@@ -39,7 +38,7 @@ public class ManageWebsiteService {
         })
         .map(websiteCategoryRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
+          throw new CategoryNotFoundException();
         });
 
     return websiteRepository.save(websiteEntity);
@@ -58,7 +57,7 @@ public class ManageWebsiteService {
         })
         .map(websiteRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
+          throw new SiteNotFoundException();
         });
   }
 
@@ -71,7 +70,7 @@ public class ManageWebsiteService {
         })
         .map(websiteRepository::save)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 웹페이지가 존재하지 않습니다.", ErrorType.NOT_FOUND);
+          throw new SiteNotFoundException();
         });
   }
 

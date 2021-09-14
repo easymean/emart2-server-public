@@ -1,6 +1,6 @@
 package com.emart2.redirect.website.entity;
 
-import com.emart2.redirect.common.BaseEntity;
+import com.emart2.redirect.common.entity.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

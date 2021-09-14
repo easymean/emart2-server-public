@@ -1,6 +1,5 @@
 package com.emart2.redirect.user.service;
 
-import com.emart2.redirect.user.entity.UserEntity;
 import com.emart2.redirect.user.repository.UserRepository;
 
 import org.springframework.stereotype.Service;

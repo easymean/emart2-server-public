@@ -1,6 +1,6 @@
 package com.emart2.redirect.common;
 
-import com.emart2.redirect.exception.NotFoundException;
+import com.emart2.redirect.common.exception.CommonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,9 +11,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-  @ExceptionHandler(NotFoundException.class)
+  @ExceptionHandler(CommonException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public CommonResponse<Object> handleException(NotFoundException ex) {
+  public CommonResponse<Object> handleException(CommonException ex) {
     logger.error(ex.getMessage());
     return CommonResponse.fail(ex.getMessage());
   }
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(UsernameNotFoundException.class)
   @ResponseStatus(HttpStatus.FORBIDDEN)
-  public CommonResponse<Object> handleException(UsernameNotFoundException ex){
+  public CommonResponse<Object> handleException(UsernameNotFoundException ex) {
     logger.error(ex.getMessage());
     return CommonResponse.fail(ex.getMessage());
   }

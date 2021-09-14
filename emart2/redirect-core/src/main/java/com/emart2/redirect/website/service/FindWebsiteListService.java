@@ -1,8 +1,8 @@
 package com.emart2.redirect.website.service;
 
-import com.emart2.redirect.exception.NotFoundException;
 import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import com.emart2.redirect.website.entity.WebsiteEntity;
+import com.emart2.redirect.website.exception.SiteNotFoundException;
 import com.emart2.redirect.website.repository.WebsiteCategoryRepository;
 import com.emart2.redirect.website.repository.WebsiteRepository;
 import com.emart2.redirect.type.ErrorType;
@@ -24,7 +24,7 @@ public class FindWebsiteListService {
   public List<WebsiteEntity> findByCategoryId(Long categoryId) {
     WebsiteCategoryEntity websiteCategoryEntity = websiteCategoryRepository.findByIdAndIsActiveIsTrue(categoryId)
         .orElseGet(() -> {
-          throw new NotFoundException("id에 해당하는 카테고리가 존재하지 않습니다.", ErrorType.NOT_FOUND);
+          throw new SiteNotFoundException();
         });
     return new ArrayList<>(websiteCategoryEntity.getWebsiteEntities());
   }

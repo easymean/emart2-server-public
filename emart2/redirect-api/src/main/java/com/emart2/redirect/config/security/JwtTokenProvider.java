@@ -1,6 +1,6 @@
 package com.emart2.redirect.config.security;
 
-import com.emart2.redirect.auth.AuthService;
+import com.emart2.redirect.auth.service.AuthService;
 import com.emart2.redirect.exception.TokenException;
 import com.emart2.redirect.type.ErrorType;
 import io.jsonwebtoken.*;
@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,8 @@ public class JwtTokenProvider implements Serializable {
   private static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 7 * 1000;
   private final AuthService authService;
   private Logger logger = LoggerFactory.getLogger(this.getClass());
-  private JwtTokenProvider(AuthService authService){
+
+  private JwtTokenProvider(AuthService authService) {
     this.authService = authService;
   }
 
@@ -33,9 +33,9 @@ public class JwtTokenProvider implements Serializable {
   private String secret;
 
   /**
-  *토큰 생성
-  **/
-  public String generateToken(UserDetails user){
+   * 토큰 생성
+   **/
+  public String generateToken(UserDetails user) {
     Date now = new Date();
     logger.info("token created");
     return Jwts.builder()
@@ -51,7 +51,7 @@ public class JwtTokenProvider implements Serializable {
   /**
    * claim 생성
    **/
-  private static Map<String, Object> createClaims(UserDetails user){
+  private static Map<String, Object> createClaims(UserDetails user) {
     Map<String, Object> claims = new HashMap<>();
     claims.put("role", user.getAuthorities());
     return claims;
@@ -60,14 +60,14 @@ public class JwtTokenProvider implements Serializable {
   /**
    * secret 키를 통해 token에 있는 모든 claims 조회
    **/
-  private Claims getAllClaimsFromToken(String token){
+  private Claims getAllClaimsFromToken(String token) {
     return Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
   }
 
   /**
    * claim에 claimsResolver 함수를 적용한다.
    **/
-  public <T>T getClaimFromToken(String token, Function<Claims, T> claimsResolver){
+  public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = getAllClaimsFromToken(token);
     return claimsResolver.apply(claims);
   }
@@ -75,37 +75,37 @@ public class JwtTokenProvider implements Serializable {
   /**
    * token에서 subject 사져오기
    **/
-  public String getUsernameFromToken(String token){
+  public String getUsernameFromToken(String token) {
     try {
       return getClaimFromToken(token, Claims::getSubject);
-    }catch(Exception ex){
+    } catch (Exception ex) {
       throw new TokenException("cannot get username from token", ErrorType.INVALID_TOKEN);
     }
   }
 
-  public Boolean isTokenExpired(String token){
+  public Boolean isTokenExpired(String token) {
     final Date expiration = getClaimFromToken(token, Claims::getExpiration);
     return expiration.before(new Date());
   }
 
   /**
-   *토큰 유효성 체크
+   * 토큰 유효성 체크
    **/
-  public Boolean validateToken(String token){
-    try{
+  public Boolean validateToken(String token) {
+    try {
       return !isTokenExpired(token);
-    }catch(Exception ex){
+    } catch (Exception ex) {
       return false;
     }
   }
-  
-  public Authentication getAuthentication(String token){
+
+  public Authentication getAuthentication(String token) {
     Claims claims = getAllClaimsFromToken(token);
 
     logger.info("=============================");
     logger.info(claims.get("role").toString());
 
-    if(claims.get("role") == null){
+    if (claims.get("role") == null) {
       throw new TokenException("권한이 없습니다.", ErrorType.INVALID_TOKEN);
     }
     final String username = getUsernameFromToken(token);

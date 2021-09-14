@@ -1,12 +1,15 @@
-package com.emart2.redirect.auth;
+package com.emart2.redirect.auth.service;
 
+import com.emart2.redirect.auth.entity.UserAccount;
+import com.emart2.redirect.auth.exception.UsernameNotFoundException;
+import com.emart2.redirect.auth.exception.WrongPasswordException;
+import com.emart2.redirect.type.ErrorType;
 import com.emart2.redirect.user.entity.UserEntity;
 import com.emart2.redirect.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +29,7 @@ public class AuthService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     UserEntity user = userRepository.findByUsername(username);
     if (user == null) {
-      throw new UsernameNotFoundException("id에 해당하는 user가 존재하지 않습니다.");
+      throw new UsernameNotFoundException(ErrorType.NOT_FOUND);
     }
     return new UserAccount(user);
   }
@@ -34,10 +37,10 @@ public class AuthService implements UserDetailsService {
   public UserAccount login(String username, String password) {
     UserEntity user = userRepository.findByUsername(username);
     if (user == null) {
-      throw new UsernameNotFoundException("id에 해당하는 user가 존재하지 않습니다.");
+      throw new UsernameNotFoundException(ErrorType.NOT_FOUND);
     }
     if (!passwordEncoder.matches(password, user.getPassword())) {
-      throw new UsernameNotFoundException("id가 존재하지 않거나 비밀번호가 틀렸습니다.");
+      throw new WrongPasswordException(ErrorType.WRONG_PASSWORD);
     }
     return new UserAccount(user);
   }

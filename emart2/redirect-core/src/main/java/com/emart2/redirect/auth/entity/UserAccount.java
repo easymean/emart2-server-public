@@ -1,4 +1,4 @@
-package com.emart2.redirect.auth;
+package com.emart2.redirect.auth.entity;
 
 import com.emart2.redirect.user.entity.UserEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

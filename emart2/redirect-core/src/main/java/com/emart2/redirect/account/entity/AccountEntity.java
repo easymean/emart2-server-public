@@ -1,9 +1,8 @@
 package com.emart2.redirect.account.entity;
 
-import com.emart2.redirect.common.BaseEntity;
+import com.emart2.redirect.common.entity.BaseEntity;
 import com.emart2.redirect.type.AccountType;
 import com.emart2.redirect.user.entity.UserEntity;
-import com.emart2.redirect.website.entity.WebsiteEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +30,9 @@ public class AccountEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private AccountType gubun; // PUBLIC OR PRIVATE
 
-  @ManyToOne @Setter
-  @JoinColumn(name="userId")
+  @ManyToOne
+  @Setter
+  @JoinColumn(name = "userId")
   private UserEntity user;
 
   @Setter

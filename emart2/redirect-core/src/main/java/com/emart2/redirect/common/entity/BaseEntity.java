@@ -1,4 +1,4 @@
-package com.emart2.redirect.common;
+package com.emart2.redirect.common.entity;
 
 import lombok.Getter;
 import lombok.Setter;
