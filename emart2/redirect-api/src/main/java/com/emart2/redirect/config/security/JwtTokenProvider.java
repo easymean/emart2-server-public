@@ -1,5 +1,6 @@
 package com.emart2.redirect.config.security;
 
+import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.auth.service.AuthService;
 import com.emart2.redirect.exception.TokenException;
 import com.emart2.redirect.type.ErrorType;
@@ -35,15 +36,15 @@ public class JwtTokenProvider implements Serializable {
   /**
    * 토큰 생성
    **/
-  public String generateToken(UserDetails user) {
+  public String generateToken(UserAccount user) {
     Date now = new Date();
     logger.info("token created");
     return Jwts.builder()
         .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-        .setIssuedAt(now) // 발급 시간 현재
-        .setExpiration(new Date(now.getTime() + JWT_TOKEN_VALIDITY)) // 만료시간 1주일 뒤
-        .setSubject(user.getUsername()) // claim에 subject가 저장된다.
-        .setClaims(createClaims(user))//클레임 설정(유저 정보)
+        .setClaims(createClaims(user)) // 공개 클레임 설정(유저 정보) * 가장 먼저 설정해야함 뒤에 두면 덮어쓰기 된다. *
+        .setSubject(user.getUsername()) // 토큰 제목: 유일한 키값(유저 아이디)
+        .setIssuedAt(now) // 발급 시간: 현재
+        .setExpiration(new Date(now.getTime() + JWT_TOKEN_VALIDITY)) // 만료 시점: 1주일 뒤
         .signWith(SignatureAlgorithm.HS256, this.secret) //암호화 키, 암호화 방법
         .compact();
   }
@@ -51,7 +52,7 @@ public class JwtTokenProvider implements Serializable {
   /**
    * claim 생성
    **/
-  private static Map<String, Object> createClaims(UserDetails user) {
+  private static Map<String, Object> createClaims(UserAccount user) {
     Map<String, Object> claims = new HashMap<>();
     claims.put("role", user.getAuthorities());
     return claims;
@@ -73,7 +74,7 @@ public class JwtTokenProvider implements Serializable {
   }
 
   /**
-   * token에서 subject 사져오기
+   * token에서 subject 가져오기
    **/
   public String getUsernameFromToken(String token) {
     try {
@@ -83,9 +84,19 @@ public class JwtTokenProvider implements Serializable {
     }
   }
 
+  /**
+   * token에서 expiration 가져오기
+   **/
+  public Date getExpirationDate(String token){
+    try{
+      return getClaimFromToken(token, Claims::getExpiration);
+    } catch(Exception ex){
+      throw new TokenException("cannot get expiration time from token", ErrorType.INVALID_TOKEN);
+    }
+  }
+
   public Boolean isTokenExpired(String token) {
-    final Date expiration = getClaimFromToken(token, Claims::getExpiration);
-    return expiration.before(new Date());
+    return getExpirationDate(token).before(new Date());
   }
 
   /**
@@ -101,9 +112,6 @@ public class JwtTokenProvider implements Serializable {
 
   public Authentication getAuthentication(String token) {
     Claims claims = getAllClaimsFromToken(token);
-
-    logger.info("=============================");
-    logger.info(claims.get("role").toString());
 
     if (claims.get("role") == null) {
       throw new TokenException("권한이 없습니다.", ErrorType.INVALID_TOKEN);
