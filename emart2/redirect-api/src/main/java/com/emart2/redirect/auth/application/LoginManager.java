@@ -3,7 +3,7 @@ package com.emart2.redirect.auth.application;
 import com.emart2.redirect.auth.service.AuthService;
 import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.auth.dto.LoginDto;
-import com.emart2.redirect.config.security.JwtTokenProvider;
+import com.emart2.redirect.common.security.service.JwtTokenProvider;
 import org.springframework.stereotype.Component;
 
 @Component

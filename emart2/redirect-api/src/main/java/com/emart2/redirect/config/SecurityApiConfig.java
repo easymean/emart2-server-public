@@ -1,7 +1,7 @@
 package com.emart2.redirect.config;
 
 import com.emart2.redirect.config.security.JwtTokenFilter;
-import com.emart2.redirect.config.security.JwtTokenProvider;
+import com.emart2.redirect.common.security.service.JwtTokenProvider;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,8 +36,9 @@ public class SecurityApiConfig extends WebSecurityConfigurerAdapter {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 사용하지 않음
     http.authorizeRequests()
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-        .mvcMatchers("/auth/login", "/auth/signup").permitAll() // 로그인 회원가입 페이지만 접근 가능
-        .mvcMatchers("/**").hasRole("USER")
+        .anyRequest().permitAll() // 임시 허용
+        //.mvcMatchers("/auth/login", "/auth/signup").permitAll() // 로그인 회원가입 페이지만 접근 가능
+        //.mvcMatchers("/**").hasRole("USER")
         //.anyRequest().authenticated() // 서비스 이용을 위해선 인증받은 사용자만 허가 가능
         .and()
         .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)

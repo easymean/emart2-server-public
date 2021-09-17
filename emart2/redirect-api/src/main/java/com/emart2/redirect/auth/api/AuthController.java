@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
   private final LoginManager loginManager;
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   public AuthController(LoginManager loginManager) {
     this.loginManager = loginManager;
