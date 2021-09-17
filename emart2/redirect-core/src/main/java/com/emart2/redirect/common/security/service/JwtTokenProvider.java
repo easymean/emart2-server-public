@@ -1,9 +1,10 @@
-package com.emart2.redirect.config.security;
+package com.emart2.redirect.common.security.service;
 
 import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.auth.service.AuthService;
-import com.emart2.redirect.exception.TokenException;
-import com.emart2.redirect.type.ErrorType;
+import com.emart2.redirect.common.security.exception.NotFoundExpirationFromTokenException;
+import com.emart2.redirect.common.security.exception.NotFoundRoleFromTokenException;
+import com.emart2.redirect.common.security.exception.NotFoundUsernameFromTokenException;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,7 +81,7 @@ public class JwtTokenProvider implements Serializable {
     try {
       return getClaimFromToken(token, Claims::getSubject);
     } catch (Exception ex) {
-      throw new TokenException("cannot get username from token", ErrorType.INVALID_TOKEN);
+      throw new NotFoundUsernameFromTokenException();
     }
   }
 
@@ -91,7 +92,7 @@ public class JwtTokenProvider implements Serializable {
     try{
       return getClaimFromToken(token, Claims::getExpiration);
     } catch(Exception ex){
-      throw new TokenException("cannot get expiration time from token", ErrorType.INVALID_TOKEN);
+      throw new NotFoundExpirationFromTokenException();
     }
   }
 
@@ -114,7 +115,7 @@ public class JwtTokenProvider implements Serializable {
     Claims claims = getAllClaimsFromToken(token);
 
     if (claims.get("role") == null) {
-      throw new TokenException("권한이 없습니다.", ErrorType.INVALID_TOKEN);
+      throw new NotFoundRoleFromTokenException();
     }
     final String username = getUsernameFromToken(token);
     UserDetails userAccount = authService.loadUserByUsername(username);

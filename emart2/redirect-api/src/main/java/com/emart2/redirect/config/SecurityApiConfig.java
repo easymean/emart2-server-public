@@ -1,7 +1,7 @@
 package com.emart2.redirect.config;
 
 import com.emart2.redirect.config.security.JwtTokenFilter;
-import com.emart2.redirect.config.security.JwtTokenProvider;
+import com.emart2.redirect.common.security.service.JwtTokenProvider;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -16,7 +16,6 @@ dependencies {
     implementation "org.mapstruct:mapstruct:$mapstructVersion"
     annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
 
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
     implementation "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindVersion"
