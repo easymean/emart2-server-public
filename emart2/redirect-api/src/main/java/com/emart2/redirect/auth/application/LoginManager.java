@@ -23,7 +23,12 @@ public class LoginManager {
     return mapper.toDto(authService.createUser(mapper.toEntity(req)));
   }
 
-  public String login(LoginDto.Login req) {
+  public LoginDto.Response login(LoginDto.Login req) {
+    UserAccount user = authService.login(req.getUsername(), req.getPassword());
+    return new LoginDto.Response(user);
+  }
+
+  public String generateToken(LoginDto.Login req){
     UserAccount user = authService.login(req.getUsername(), req.getPassword());
     return jwtTokenProvider.generateToken(user);
   }

@@ -1,5 +1,6 @@
 package com.emart2.redirect.auth.dto;
 
+import com.emart2.redirect.auth.entity.UserAccount;
 import lombok.*;
 
 public class LoginDto {
@@ -9,15 +10,13 @@ public class LoginDto {
   public static class Response {
     private String username;
     private String email;
-    private String password;
     private String role;
 
     @Builder
-    public Response(String username, String email, String password, String role) {
-      this.username = username;
-      this.email = email;
-      this.password = password;
-      this.role = role;
+    public Response(UserAccount user) {
+      this.username = user.getUsername();
+      this.email = user.getUser().getEmail();
+      this.role = user.getUser().getRole();
     }
 
   }
