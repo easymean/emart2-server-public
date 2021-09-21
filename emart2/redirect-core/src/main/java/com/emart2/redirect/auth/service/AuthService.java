@@ -29,7 +29,7 @@ public class AuthService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     UserEntity user = userRepository.findByUsername(username);
     if (user == null) {
-      throw new UsernameNotFoundException(ErrorType.NOT_FOUND);
+      throw new UsernameNotFoundException();
     }
     return new UserAccount(user);
   }
@@ -37,10 +37,10 @@ public class AuthService implements UserDetailsService {
   public UserAccount login(String username, String password) {
     UserEntity user = userRepository.findByUsername(username);
     if (user == null) {
-      throw new UsernameNotFoundException(ErrorType.NOT_FOUND);
+      throw new UsernameNotFoundException();
     }
     if (!passwordEncoder.matches(password, user.getPassword())) {
-      throw new WrongPasswordException(ErrorType.WRONG_PASSWORD);
+      throw new WrongPasswordException();
     }
     return new UserAccount(user);
   }
