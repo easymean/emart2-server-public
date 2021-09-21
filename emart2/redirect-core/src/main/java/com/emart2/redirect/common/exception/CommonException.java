@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 
 public class CommonException extends RuntimeException {
   @Enumerated(value = EnumType.STRING)
-  private ErrorType errorType;
+  private final ErrorType errorType;
 
   public CommonException(String message, ErrorType errorType) {
     super(message);
@@ -17,4 +17,5 @@ public class CommonException extends RuntimeException {
   public String getErrorCode() {
     return errorType.getMessage();
   }
+  public ErrorType getErrorType() { return this.errorType;}
 }
