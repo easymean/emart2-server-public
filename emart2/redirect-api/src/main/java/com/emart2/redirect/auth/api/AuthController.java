@@ -42,12 +42,11 @@ public class AuthController {
 
   @PostMapping("/signup")
   public CommonResponse<LoginDto.Response> signup(@RequestBody LoginDto.Signup req) {
-    loginManager.signUp(req);
-    return CommonResponse.ok("success", null);
+    return CommonResponse.ok("success", loginManager.signUp(req));
   }
 
-  @PostMapping("/id")
-  public CommonResponse<Boolean> checkId(@RequestBody LoginDto.Signup req) {
-    return CommonResponse.ok("success", loginManager.checkId(req));
+  @PostMapping("/unique")
+  public CommonResponse<Boolean> checkId(@RequestBody String id) {
+    return CommonResponse.ok("success", loginManager.checkId(id));
   }
 }

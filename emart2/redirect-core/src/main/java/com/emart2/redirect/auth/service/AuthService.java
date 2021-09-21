@@ -3,7 +3,6 @@ package com.emart2.redirect.auth.service;
 import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.auth.exception.UsernameNotFoundException;
 import com.emart2.redirect.auth.exception.WrongPasswordException;
-import com.emart2.redirect.type.ErrorType;
 import com.emart2.redirect.user.entity.UserEntity;
 import com.emart2.redirect.user.repository.UserRepository;
 import org.slf4j.Logger;

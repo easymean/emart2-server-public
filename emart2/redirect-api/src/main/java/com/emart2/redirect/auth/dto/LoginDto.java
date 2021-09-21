@@ -13,10 +13,10 @@ public class LoginDto {
     private String role;
 
     @Builder
-    public Response(UserAccount user) {
-      this.username = user.getUsername();
-      this.email = user.getUser().getEmail();
-      this.role = user.getUser().getRole();
+    public Response(String username, String email, String role) {
+      this.username = username;
+      this.email = email;
+      this.role = role;
     }
 
   }

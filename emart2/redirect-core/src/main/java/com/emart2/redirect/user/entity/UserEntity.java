@@ -1,8 +1,10 @@
 package com.emart2.redirect.user.entity;
 
 import com.emart2.redirect.account.entity.AccountEntity;
+import com.emart2.redirect.common.entity.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,8 +14,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "user") @NoArgsConstructor
+public class UserEntity extends BaseEntity {
 
   @Id
   @GeneratedValue
@@ -37,11 +39,9 @@ public class UserEntity {
   @OneToMany
   private List<AccountEntity> accountList = new ArrayList<>();
 
-  public UserEntity() {
-  }
-
   @Builder
   public UserEntity(String username, String email, String password, String role) {
+    super();
     this.username = username;
     this.email = email;
     this.password = password;
