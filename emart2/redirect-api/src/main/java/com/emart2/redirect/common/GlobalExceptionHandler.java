@@ -22,7 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
    * login exception
    **/
   @ExceptionHandler({UsernameNotFoundException.class, WrongPasswordException.class})
-  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public CommonResponse<Object> handleLoginException(CommonException ex){
     logger.error(ex.getMessage());
     return CommonResponse.fail(ex.getMessage(), ex.getErrorType());
