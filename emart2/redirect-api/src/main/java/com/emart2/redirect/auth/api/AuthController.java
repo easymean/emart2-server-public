@@ -23,7 +23,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
+  public CommonResponse<Boolean> login(@RequestBody LoginDto.Login req, HttpServletResponse res) {
     String token = loginManager.generateToken(req);
     ResponseCookie cookie = ResponseCookie.from("accessToken", token)
         .domain("localhost")
@@ -34,10 +34,7 @@ public class AuthController {
 //    Cookie cookie = new Cookie("accessToken", token);
 //    res.addCookie(cookie);
     res.addHeader("Set-Cookie", cookie.toString());
-    //return new ResponseEntity<>(HttpStatus.OK);
-
-    return ResponseEntity.ok()
-            .body(loginManager.login(req));
+    return CommonResponse.ok("success", true);
   }
 
   @PostMapping("/signup")

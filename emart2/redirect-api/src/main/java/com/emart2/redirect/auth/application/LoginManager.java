@@ -25,7 +25,7 @@ public class LoginManager {
 
   public LoginDto.Response login(LoginDto.Login req) {
     UserAccount user = authService.login(req.getUsername(), req.getPassword());
-    return new LoginDto.Response(user);
+    return mapper.toDto(user.getUser());
   }
 
   public String generateToken(LoginDto.Login req){
@@ -33,7 +33,7 @@ public class LoginManager {
     return jwtTokenProvider.generateToken(user);
   }
 
-  public Boolean checkId(LoginDto.Signup req) {
-    return authService.checkId(req.getUsername());
+  public Boolean checkId(String id) {
+    return authService.checkId(id);
   }
 }
