@@ -6,6 +6,8 @@ import com.emart2.redirect.common.CommonResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/categories")
 public class ManageCategoryController {
@@ -14,6 +16,11 @@ public class ManageCategoryController {
 
   public ManageCategoryController(CategoryManager categoryManager) {
     this.categoryManager = categoryManager;
+  }
+
+  @GetMapping()
+  public CommonResponse<List<ManageCategoryDto.Response>> getCategories(){
+    return CommonResponse.ok("success", categoryManager.findCategoryList());
   }
 
   @GetMapping("/{id}")

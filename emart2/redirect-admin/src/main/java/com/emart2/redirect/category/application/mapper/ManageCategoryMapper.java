@@ -5,6 +5,8 @@ import com.emart2.redirect.website.entity.WebsiteCategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ManageCategoryMapper {
 
@@ -14,5 +16,7 @@ public interface ManageCategoryMapper {
 
   @Mapping(source = "colOrder", target = "order")
   ManageCategoryDto.Response toDto(WebsiteCategoryEntity websiteCategoryEntity);
+
+  List<ManageCategoryDto.Response> toDto(List<WebsiteCategoryEntity> websiteCategoryEntityList);
 
 }

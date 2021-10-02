@@ -6,6 +6,8 @@ import com.emart2.redirect.website.dto.ManageWebsiteDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/websites")
 public class ManageWebsiteController {
@@ -21,6 +23,12 @@ public class ManageWebsiteController {
   public CommonResponse<ManageWebsiteDto.Response> createWebsite(@RequestBody ManageWebsiteDto.Create request) {
     return CommonResponse.ok("success", websiteManager.createWebsite(request));
   }
+
+  @GetMapping()
+  public CommonResponse<List<ManageWebsiteDto.Response>> findWebsiteList() {
+    return CommonResponse.ok("success", websiteManager.findWebsiteList());
+  }
+
 
   @GetMapping("/{id}")
   public CommonResponse<ManageWebsiteDto.Response> findWebsite(@PathVariable("id") Long id) {

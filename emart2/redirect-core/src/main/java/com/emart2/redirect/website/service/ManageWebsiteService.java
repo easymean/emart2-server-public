@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,10 @@ public class ManageWebsiteService {
   public ManageWebsiteService(WebsiteRepository websiteRepository, WebsiteCategoryRepository websiteCategoryRepository) {
     this.websiteRepository = websiteRepository;
     this.websiteCategoryRepository = websiteCategoryRepository;
+  }
+
+  public List<WebsiteEntity> findWebsiteList(){
+      return websiteRepository.findAllByIsActiveIsTrue();
   }
 
   public WebsiteEntity findById(Long id) {
