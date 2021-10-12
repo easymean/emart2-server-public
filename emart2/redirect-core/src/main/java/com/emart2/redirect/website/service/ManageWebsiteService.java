@@ -42,6 +42,10 @@ public class ManageWebsiteService {
           return category;
         })
         .map(websiteCategoryRepository::save)
+            .map(category -> {
+                websiteEntity.setCategoryName(category.getName());
+                return category;
+            })
         .orElseGet(() -> {
           throw new CategoryNotFoundException();
         });

@@ -19,15 +19,18 @@ public class ManageWebsiteDto {
     private String url;
     private StageType stage;
     private boolean dev;
+    private String categoryName;
 
     @Builder
-    public Response(Long id, String name, String description, String url, StageType stage, boolean dev) {
+    public Response(Long id, String name, String description, String url, StageType stage, boolean dev,
+                    String categoryName) {
       this.id = id;
       this.name = name;
       this.description = description;
       this.url = url;
       this.stage = stage;
       this.dev = dev;
+      this.categoryName = categoryName;
     }
   }
 
