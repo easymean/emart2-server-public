@@ -7,23 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CategoryListDto {
-  private List<Response> categoryList;
-
-  public CategoryListDto() {
-    categoryList = new ArrayList<>();
-  }
-
-  public CategoryListDto(List<Response> categoryList) {
-    this.categoryList = categoryList;
-  }
-
-  public void addCategory(Response dto) {
-    if (this.categoryList == null) {
-      this.categoryList = new ArrayList<>();
-    }
-    this.categoryList.add(dto);
-  }
+public class CategoryDto {
 
   @Getter
   @Setter
