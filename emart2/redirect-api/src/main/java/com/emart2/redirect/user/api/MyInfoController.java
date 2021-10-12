@@ -2,7 +2,7 @@ package com.emart2.redirect.user.api;
 
 import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.common.CommonResponse;
-import com.emart2.redirect.user.application.MyInfoFinder;
+import com.emart2.redirect.user.application.MyInfoMapper;
 import com.emart2.redirect.user.dto.MyInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,18 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/my")
 public class MyInfoController {
 
-  private final MyInfoFinder myInfoFinder;
+  private final MyInfoMapper myInfoMapper;
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  public MyInfoController(MyInfoFinder myInfoFinder) {
-    this.myInfoFinder = myInfoFinder;
+  public MyInfoController(MyInfoMapper myInfoMapper) {
+    this.myInfoMapper = myInfoMapper;
   }
 
   @GetMapping
   public CommonResponse<MyInfoDto.Response> getMyInfo(@AuthenticationPrincipal UserAccount user){
-    Long userId = user.getUser().getId();
-    logger.info("==================");
-    logger.info(String.valueOf(userId));
-    return CommonResponse.ok("success", myInfoFinder.getMyInfo(userId));
+
+    return CommonResponse.ok("success", myInfoMapper.toDto(user.getUser()));
   }
 }
