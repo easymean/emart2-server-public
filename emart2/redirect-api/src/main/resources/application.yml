@@ -7,3 +7,7 @@ spring:
     include:
       - auth
       - local_h2
+
+
+server:
+  port: 8081
