@@ -40,6 +40,7 @@ public class ManageWebsiteCategoryService {
           category.setDescription(req.getDescription());
           return category;
         })
+            .map(websiteCategoryRepository::save)
         .orElseGet(() -> {
           throw new CategoryNotFoundException();
         });
