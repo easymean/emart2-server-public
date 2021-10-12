@@ -11,7 +11,7 @@ public class UserAccount extends User {
   private final UserEntity user;
 
   public UserAccount(UserEntity user) {
-    super(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
+    super(user.getUsername(), "", List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
     this.user = user;
   }
 

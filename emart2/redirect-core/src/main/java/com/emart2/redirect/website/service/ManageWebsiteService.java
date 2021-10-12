@@ -53,6 +53,7 @@ public class ManageWebsiteService {
     return websiteRepository.save(websiteEntity);
   }
 
+  @Transactional
   public WebsiteEntity updateWebsite(Long id, WebsiteEntity req) {
     Optional<WebsiteEntity> optional = websiteRepository.findByIdAndIsActiveIsTrue(id);
     return optional
