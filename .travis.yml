@@ -1,0 +1,30 @@
+branches:
+  only:
+    - main
+
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - '$HOME/.gradle'
+
+before_install:
+  - chmod +x gradlew
+
+script: "./gradlew clean build"
+
+before_deploy:
+  - zip -r emart2-server-public ./*
+  - mkdir -p deploy
+  - mv emart2-server-public.zip deploy/emart2-server-public.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+
+    bucket: swchoi-springboot-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait_until_deployed : true
