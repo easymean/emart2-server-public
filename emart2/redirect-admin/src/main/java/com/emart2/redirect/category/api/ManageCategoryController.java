@@ -18,7 +18,7 @@ public class ManageCategoryController {
     this.categoryManager = categoryManager;
   }
 
-  @GetMapping()
+  @GetMapping
   public CommonResponse<List<ManageCategoryDto.Response>> getCategories(){
     return CommonResponse.ok("success", categoryManager.findCategoryList());
   }

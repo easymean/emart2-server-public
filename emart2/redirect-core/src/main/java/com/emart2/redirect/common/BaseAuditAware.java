@@ -11,7 +11,6 @@ public class BaseAuditAware implements AuditorAware<BaseEntity> {
 
   @Override
   public Optional<BaseEntity> getCurrentAuditor() {
-    System.out.println("현재 유저");
     return Optional.empty();
   }
 }
