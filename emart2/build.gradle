@@ -64,7 +64,7 @@ configure(multiModules) {
     }
 
     bootJar {
-        archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+        //archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}
     }
 
     jib {
@@ -73,7 +73,7 @@ configure(multiModules) {
             image = "adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.11_9"
         }
         to {
-            image = "m2162003/${bootJar.archiveFileName}"
+            image = "m2162003/emart2-redirect"
             credHelper = 'osxkeychain'
             tags = ['latest']
         }
@@ -88,6 +88,17 @@ configure(multiModules) {
 
 task cleanGeneratedDir(type: Delete) {
     delete file('src/main/generated')
+}
+
+// settings for docker
+task dockerDownAll(type:Exec) {
+    commandLine 'docker-compose', 'down'
+}
+
+task dockerRunAll(type:Exec) {
+    dependsOn dockerDownAll
+    dependsOn subprojects.jibDockerBuild
+    commandLine 'docker-compose', 'up', '-d'
 }
 
 
