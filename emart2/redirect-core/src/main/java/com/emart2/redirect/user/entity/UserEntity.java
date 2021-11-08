@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "user") @NoArgsConstructor
-public class UserEntity extends BaseEntity {
+public class UserEntity extends BaseEntity implements User {
 
   @Id
   @GeneratedValue

@@ -1,15 +1,25 @@
 package com.emart2.redirect.config;
 
+import com.emart2.redirect.auth.api.resolver.LoginRequiredResolver;
 import com.emart2.redirect.type.StageType;
 import com.emart2.redirect.website.application.mapper.EnumMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 @Configuration
-public class WebApiConfig {
+public class WebApiConfig implements WebMvcConfigurer{
+
+  private final LoginRequiredResolver loginRequiredResolver;
+
+  public WebApiConfig(LoginRequiredResolver loginRequiredResolver){
+    this.loginRequiredResolver = loginRequiredResolver;
+  }
 
   @Bean
   public EnumMapper enumMapper() {
@@ -36,6 +46,11 @@ public class WebApiConfig {
 
 
     };
+  }
+
+  @Override
+  public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+    resolvers.add(loginRequiredResolver);
   }
 
 }

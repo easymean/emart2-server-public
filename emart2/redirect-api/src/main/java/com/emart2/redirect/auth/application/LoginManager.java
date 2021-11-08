@@ -1,9 +1,9 @@
 package com.emart2.redirect.auth.application;
 
 import com.emart2.redirect.auth.service.AuthService;
-import com.emart2.redirect.auth.entity.UserAccount;
 import com.emart2.redirect.auth.dto.LoginDto;
 import com.emart2.redirect.common.security.service.JwtTokenProvider;
+import com.emart2.redirect.user.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,13 +23,8 @@ public class LoginManager {
     return mapper.toDto(authService.createUser(mapper.toEntity(req)));
   }
 
-  public LoginDto.Response login(LoginDto.Login req) {
-    UserAccount user = authService.login(req.getUsername(), req.getPassword());
-    return mapper.toDto(user.getUser());
-  }
-
-  public String generateToken(LoginDto.Login req){
-    UserAccount user = authService.login(req.getUsername(), req.getPassword());
+  public String login(LoginDto.Login req){
+    User user = authService.login(req.getUsername(), req.getPassword());
     return jwtTokenProvider.generateToken(user);
   }
 

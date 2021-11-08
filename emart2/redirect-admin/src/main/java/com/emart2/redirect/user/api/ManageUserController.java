@@ -1,6 +1,6 @@
 package com.emart2.redirect.user.api;
 
-import com.emart2.redirect.auth.entity.UserAccount;
+import com.emart2.redirect.auth.entity.UserImpl;
 import com.emart2.redirect.common.CommonResponse;
 import com.emart2.redirect.user.application.UserManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,7 +17,7 @@ public class ManageUserController {
   }
 
   @GetMapping("/test")
-  public void test(@AuthenticationPrincipal UserAccount user) {
+  public void test(@AuthenticationPrincipal UserImpl user) {
     System.out.println(user.getUsername());
 
   }

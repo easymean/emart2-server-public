@@ -1,13 +1,23 @@
 package com.emart2.redirect.config;
 
+import com.emart2.redirect.auth.api.resolver.AdminRequiredResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 @Configuration
-public class WebAdminConfig {
+public class WebAdminConfig implements WebMvcConfigurer{
+
+  private final AdminRequiredResolver adminRequiredResolver;
+
+  public WebAdminConfig(AdminRequiredResolver adminRequiredResolver){
+    this.adminRequiredResolver = adminRequiredResolver;
+  }
 
   @Bean
   public WebMvcConfigurer corsConfigurer() {
@@ -24,9 +34,12 @@ public class WebAdminConfig {
                 HttpMethod.DELETE.name()
             );
       }
-
-
     };
+  }
+
+  @Override
+  public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+    resolvers.add(adminRequiredResolver);
   }
 
 }

@@ -1,12 +1,10 @@
 package com.emart2.redirect.user.api;
 
-import com.emart2.redirect.auth.entity.UserAccount;
+import com.emart2.redirect.auth.api.resolver.LoginRequired;
+import com.emart2.redirect.auth.entity.UserImpl;
 import com.emart2.redirect.common.CommonResponse;
-import com.emart2.redirect.user.application.MyInfoMapper;
+import com.emart2.redirect.user.application.MyInfoManager;
 import com.emart2.redirect.user.dto.MyInfoDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,16 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/my")
 public class MyInfoController {
 
-  private final MyInfoMapper myInfoMapper;
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final MyInfoManager myInfoManager;
 
-  public MyInfoController(MyInfoMapper myInfoMapper) {
-    this.myInfoMapper = myInfoMapper;
+  public MyInfoController(MyInfoManager myInfoManager) {
+    this.myInfoManager = myInfoManager;
   }
 
   @GetMapping
-  public CommonResponse<MyInfoDto.Response> getMyInfo(@AuthenticationPrincipal UserAccount user){
-
-    return CommonResponse.ok("success", myInfoMapper.toDto(user.getUser()));
+  public CommonResponse<MyInfoDto.Response> getMyInfo(@LoginRequired UserImpl user){
+    return CommonResponse.ok("success", myInfoManager.getMyInfo(user));
   }
 }

@@ -6,6 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MyInfoMapper {
-
   MyInfoDto.Response toDto(UserEntity user);
 }

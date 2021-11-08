@@ -24,4 +24,12 @@ public class UserService {
     user.setAuthStatus(true);
   }
 
+  public UserEntity getMyInfo(Long id){
+    UserEntity user = userRepository.findByIdAndIsActiveIsTrue(id);
+    if(user == null){
+      throw new UserNotFoundException();
+    }
+    return user;
+  }
+
 }

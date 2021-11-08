@@ -1,6 +1,5 @@
 package com.emart2.redirect.auth.dto;
 
-import com.emart2.redirect.auth.entity.UserAccount;
 import lombok.*;
 
 public class LoginDto {
