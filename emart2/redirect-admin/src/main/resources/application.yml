@@ -9,4 +9,4 @@ spring:
       - auth
       - local_h2
 server:
-  port: 8080
+  port: 8081
