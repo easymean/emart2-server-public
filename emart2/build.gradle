@@ -68,7 +68,6 @@ configure(multiModules) {
     }
 
     jib {
-
         from {
             image = "adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.11_9"
         }
@@ -87,19 +86,37 @@ configure(multiModules) {
 
 
 task cleanGeneratedDir(type: Delete) {
+    description = "clean dir"
     delete file('src/main/generated')
 }
 
-// settings for docker
+/**  settings for docker **/
 task dockerDownAll(type:Exec) {
+    description = "docker-compose down"
     commandLine 'docker-compose', 'down'
 }
 
 task dockerRunAll(type:Exec) {
     dependsOn dockerDownAll
+
+    description = "jib docker build"
     dependsOn subprojects.jibDockerBuild
+
+    description = "docker-compose up"
     commandLine 'docker-compose', 'up', '-d'
 }
 
+task dockerRunAdmin(type:Exec){
+    description = "redirect-admin jib in local daemon"
+    commandLine './gradlew', ':redirect-admin:jibDockerBuild','--image=m2162003/redirect-admin'
+
+}
+
+// task 실행: ./gradlew dockerRunApi
+task dockerRunApi(type:Exec){
+    description = "redirect-api jib in local daemon"
+    commandLine './gradlew', ':redirect-api:jibDockerBuild','--image=m2162003/redirect-api'
+
+}
 
 
