@@ -106,13 +106,15 @@ task dockerRunAll(type:Exec) {
     commandLine 'docker-compose', 'up', '-d'
 }
 
+/** admin 이미지 빌드 **/
 task dockerRunAdmin(type:Exec){
     description = "redirect-admin jib in local daemon"
     commandLine './gradlew', ':redirect-admin:jibDockerBuild','--image=m2162003/redirect-admin'
 
 }
 
-// task 실행: ./gradlew dockerRunApi
+/** api 이미지 빌드
+ * 실행방법 : ./gradlew dockerRunApi **/
 task dockerRunApi(type:Exec){
     description = "redirect-api jib in local daemon"
     commandLine './gradlew', ':redirect-api:jibDockerBuild','--image=m2162003/redirect-api'
